@@ -12,9 +12,11 @@ resource "openstack_compute_keypair_v2" "k8s" {
 resource "openstack_compute_instance_v2" "k8s_master" {
   name        = "k8s-master-${count.index + 1}"
   count       = var.num_k8s_masters
-  image_name  = "Debian 9.1.1"
-  flavor_name = "2C-2GB"
+  image_name  = "Debian 9"
+  flavor_name = "c2-r2-d20"
   key_pair    = openstack_compute_keypair_v2.k8s.name
+
+  availability_zone_hints = "Education"
 
   network {
     name = "k8s-network"
