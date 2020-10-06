@@ -48,7 +48,7 @@ resource "openstack_compute_floatingip_associate_v2" "k8s_master" {
 resource "openstack_compute_instance_v2" "k8s_node" {
   name        = "k8s-node-${count.index + 1}"
   count       = var.num_k8s_nodes
-  image_name  = "Debian"
+  image_name  = "Debian 9"
   flavor_name = "c2-r4-d20"
   key_pair    = openstack_compute_keypair_v2.k8s.name
 
