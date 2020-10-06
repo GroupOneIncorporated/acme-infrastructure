@@ -17,8 +17,13 @@ resource "openstack_compute_instance_v2" "k8s_master" {
   key_pair    = openstack_compute_keypair_v2.k8s.name
 
   network {
-    name = "Default network"
+    name = "k8s-network"
   }
 
   security_groups = ["default"]
+}
+
+resource "openstack_networking_floatingip_v2" "k8s_master" {
+  count = var.num_k8s_masters
+  pool  = "public"
 }
