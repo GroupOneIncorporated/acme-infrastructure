@@ -27,3 +27,11 @@ resource "openstack_networking_floatingip_v2" "k8s_master" {
   count = var.num_k8s_masters
   pool  = "public"
 }
+
+resource "openstack_compute_floatingip_associate_v2" "k8s_master" {
+  count       = var.num_k8s_masters
+  instance_id = element(openstack_compute_instance_v2.k8s_master.*.id, count.index)
+  floating_ip = element(
+    openstack_networking_floatingip_v2.k8s_master.*.address,
+    count.index,
+  )
