@@ -35,3 +35,4 @@ resource "openstack_compute_floatingip_associate_v2" "k8s_master" {
     openstack_networking_floatingip_v2.k8s_master.*.address,
     count.index,
   )
+}
