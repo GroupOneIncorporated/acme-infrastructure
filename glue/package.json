@@ -16,5 +16,17 @@
   "bugs": {
     "url": "https://github.com/GroupOneIncorporated/acme-infrastructure/issues"
   },
-  "homepage": "https://github.com/GroupOneIncorporated/acme-infrastructure#readme"
+  "homepage": "https://github.com/GroupOneIncorporated/acme-infrastructure#readme",
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.1.0",
+    "eslint": "^7.10.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsdoc": "^30.6.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  },
+  "eslintConfig": {
+    "extends": "@lnu"
+  }
 }
