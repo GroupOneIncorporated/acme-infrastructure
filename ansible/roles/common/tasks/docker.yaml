@@ -1,0 +1,18 @@
+---
+- name: Install necessary dependencies/packages
+  become: yes
+  apt:
+    update_cache: yes
+    state: present
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+
+- name: Add docker apt repo
+  become: yes
+  copy:
+    backup: yes
+    content: 
