@@ -28,6 +28,12 @@ resource "openstack_networking_subnet_v2" "k8s-subnet" {
   ip_version = 4
 }
 
+// Router for connecting internal network with the public
+resource "openstack_networking_router_v2" "k8s-router" {
+  name                = "k8s-router"
+  external_network_id = "fd401e50-9484-4883-9672-a2814089528c"
+}
+
 # -- Master node(s) -- #
 
 // Compute instance
