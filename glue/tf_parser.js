@@ -15,5 +15,5 @@ module.exports = () => {
 
   const computeInstances = tfstate.resources.filter(instance => instance.type === 'openstack_compute_instance_v2')
   const computeMasters = computeInstances.filter(instance => instance.name === masterNodeName)[0].instances
-
+  const computeWorkers = computeInstances.filter(instance => instance.name = workerNodeName)[0].instances
 }
