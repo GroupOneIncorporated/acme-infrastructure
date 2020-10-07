@@ -2,9 +2,30 @@ provider "openstack" {
   version = "~> 1.17"
 }
 
+resource "openstack_networking_router_v2" "k8s-router" {
+  name                = "k8s-router"
+  external_network_id = "f67f0d72-0ddf-11e4-9d95-e1f29f417e2f"
+}
+
 resource "openstack_compute_keypair_v2" "k8s" {
   name       = "k8s-keys"
   public_key = chomp(file(var.public_key_path))
+}
+
+# -- Networking -- #
+
+// Internal network
+resource "openstack_networking_network_v2" "k8s-network" {
+  name           = "k8s-network"
+  admin_state_up = "true"
+}
+
+// Internal network subnet
+resource "openstack_networking_subnet_v2" "k8s-subnet" {
+  name       = "k8s-subnet"
+  network_id = "${openstack_networking_network_v2.k8s-network.id}"
+  cidr       = "192.168.199.0/24"
+  ip_version = 4
 }
 
 # -- Master node(s) -- #
