@@ -30,3 +30,10 @@
     update_cache: yes
     name: docker-ce
     state: present
+
+- name: Add user to Docker group
+  become: yes
+  user:
+    name: "{{ansible_user_id}}"
+    append: yes
+    groups: [docker]
