@@ -10,4 +10,10 @@ module.exports = () => {
 
   const tfStateFile = fs.readFileSync(tfStatePath).toString()
   const tfState = JSON.parse(tfStateFile)
+
+  let parsedHosts = []
+
+  const computeInstances = tfstate.resources.filter(instance => instance.type === 'openstack_compute_instance_v2')
+  const computeMasters = computeInstances.filter(instance => instance.name === masterNodeName)[0].instances
+
 }
