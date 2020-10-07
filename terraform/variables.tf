@@ -1,5 +1,5 @@
 variable "public_key_path" {
-  default = "~/.ssh/ja222um.pub"
+  default = "~/.ssh/GroupOneInc.pub"
 }
 
 variable "num_k8s_masters" {
