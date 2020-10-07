@@ -15,4 +15,11 @@
   become: yes
   copy:
     backup: yes
-    content: 
+    content: "deb [arch=amd64] https://download.docker.com/linux/{{ansible_distribution|lower}} {{ansible_distribution_release}} stable\n"
+    dest: /etc/apt/sources.list.d/docker.list
+
+- name: Add docker apt repo key
+  become: yes
+  apt_key:
+    url: "https://download.docker.com/linux/{{ansible_distribution|lower}}/gpg"
+    state: present
