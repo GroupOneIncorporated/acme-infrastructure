@@ -15,23 +15,29 @@ resource "openstack_compute_keypair_v2" "k8s" {
 # -- Networking -- #
 
 // Internal network
-resource "openstack_networking_network_v2" "k8s-network" {
+resource "openstack_networking_network_v2" "k8s_network" {
   name           = "k8s-network"
   admin_state_up = "true"
 }
 
 // Internal network subnet
-resource "openstack_networking_subnet_v2" "k8s-subnet" {
+resource "openstack_networking_subnet_v2" "k8s_subnet" {
   name       = "k8s-subnet"
-  network_id = "${openstack_networking_network_v2.k8s-network.id}"
+  network_id = "${openstack_networking_network_v2.k8s_network.id}"
   cidr       = "192.168.199.0/24"
   ip_version = 4
 }
 
 // Router for connecting internal network with the public
-resource "openstack_networking_router_v2" "k8s-router" {
+resource "openstack_networking_router_v2" "k8s_router" {
   name                = "k8s-router"
   external_network_id = "fd401e50-9484-4883-9672-a2814089528c"
+}
+
+// Interface to the internal network for the router
+resource "openstack_networking_router_interface_v2" "k8s_router_interface" {
+  router_id = "${openstack_networking_router_v2.k8s_router.id}"
+  subnet_id = "${openstack_networking_subnet_v2.k8s_subnet.id}"
 }
 
 # -- Master node(s) -- #
