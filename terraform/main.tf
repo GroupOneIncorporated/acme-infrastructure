@@ -54,6 +54,8 @@ resource "openstack_compute_instance_v2" "k8s_master" {
   }
 
   security_groups = ["default"]
+
+  depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
 }
 
 // Floating IP
@@ -89,6 +91,8 @@ resource "openstack_compute_instance_v2" "k8s_node" {
   }
 
   security_groups = ["default"]
+
+  depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
 }
 
 // Floating IP
