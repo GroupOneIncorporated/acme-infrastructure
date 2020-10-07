@@ -2,6 +2,14 @@
 - name: Install docker
   include: docker.yaml
 
+- name: apt upgrade
+  become: yes
+  apt:
+    upgrade: safe
+    cache_valid_time: 3600
+    update_cache: yes
+    state: present
+
 - name: Add developers keys to authorized_keys
   authorized_key:
     user: "{{ansible_user_id}}"
