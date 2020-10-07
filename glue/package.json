@@ -1,0 +1,20 @@
+{
+  "name": "glue",
+  "version": "1.0.0",
+  "description": "Glue script for Terraform - Ansible - rke configs.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GroupOneIncorporated/acme-infrastructure.git"
+  },
+  "author": "Johan Andersson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GroupOneIncorporated/acme-infrastructure/issues"
+  },
+  "homepage": "https://github.com/GroupOneIncorporated/acme-infrastructure#readme"
+}
