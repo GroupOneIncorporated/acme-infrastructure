@@ -21,14 +21,26 @@ function terraformParser () {
   const computeMasters = _getMasterInstances(computeInstances)
   const computeWorkers = _getWorkerInstances(computeInstances)
 
-  const floatingIPAssociation = tf
+  const floatingIPAssociations = _getFloatingIPAssociations(tfState)
+  const masterNodeIPs = _getMasterIPs(floatingIPAssociations)
+  const workerNodeIPs = _getWorkerIPs(floatingIPAssociations)
+
+  computeMasters.forEach(instance => {
+    const ip = masterNodeIPs.filter(ip => ip.attributes.instance_id === instance.attributes.id)[0].attributes.floating_ip
+    parsedHosts.push({
+      name: instance.attributes.name,
+      ip: ip,
+      isMaster: true,
+      internal_address: instance.attributes.access_ipv4
+    })
+  })
 }
 
 /**
  * @param tfState
  */
 function _getInstances (tfState) {
-  return tfState.resources.filter(instance => instance.type === 'openstack_compute_instance_v2')
+  return tfState.resources.filter(element => element.type === 'openstack_compute_instance_v2')
 }
 
 /**
@@ -46,24 +58,24 @@ function _getWorkerInstances (instances) {
 }
 
 /**
- *
+ * @param tfState
  */
-function _getFloatingIPAssociations () {
-
+function _getFloatingIPAssociations (tfState) {
+  return tfState.resources.filter(element => element.type === 'openstack_compute_floatingip_associate_v2')
 }
 
 /**
- *
+ * @param floatingIPAssociations
  */
-function _getMasterIPs () {
-
+function _getMasterIPs (floatingIPAssociations) {
+  return floatingIPAssociations.filter(instance => instance.name === masterNodeName)[0].instances
 }
 
 /**
- *
+ * @param floatingIPAssociations
  */
-function _getWorkerIPs () {
-
+function _getWorkerIPs (floatingIPAssociations) {
+  return floatingIPAssociations.filter(instance => instance.name === workerNodeName)[0].instances
 }
 
 module.exports = terraformParser()
