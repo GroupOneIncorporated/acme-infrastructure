@@ -4,6 +4,11 @@ resource "openstack_compute_keypair_v2" "my-cloud-key" {
   name = "jd222qf_Keypair"
 }
 
+resource "openstack_networking_network_v2" "my-network" {
+  name           = "my-network"
+  admin_state_up = "true"
+}
+
 resource "openstack_compute_instance_v2" "test" {
   name            = "test-vm"
   image_name      = "Ubuntu Minimal 18.04"
@@ -14,6 +19,6 @@ resource "openstack_compute_instance_v2" "test" {
   availability_zone_hints = "Education"
 
   network {
-    name = "public"
+    name = "my-network"
   }
 }
