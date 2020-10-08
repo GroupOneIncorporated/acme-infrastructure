@@ -1,0 +1,8 @@
+Host k8s-master-1
+HostName 194.47.176.231
+User debian
+
+Host k8s-node-1
+HostName 194.47.176.238
+User debian
+

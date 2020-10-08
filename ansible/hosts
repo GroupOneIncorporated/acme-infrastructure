@@ -1,0 +1,6 @@
+k8s-master-1
+k8s-node-1
+
+[all:vars]
+docker_version="5:19.03.*"
+    

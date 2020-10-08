@@ -1,0 +1,36 @@
+nodes:
+  - address: 194.47.176.231
+    internal_address: 192.168.199.9
+    role:
+      - controlplane
+      - etcd
+    labels:
+      node-role.kubernetes.io/master: true
+    taints:
+      - key: node-role.kubernetes.io/master
+        value: true
+        effect: NoSchedule
+    hostname_override: k8s-master-1
+    user: debian
+  - address: 194.47.176.238
+    internal_address: 192.168.199.11
+    role:
+      - worker
+    hostname_override: k8s-node-1
+    user: debian
+services:
+  etcd:
+    snapshot: 'true'
+    creation: 6h
+    retention: 24h
+  kubelet:
+    extra_args:
+      cloud-provider: external
+network:
+  plugin: canal
+authentication:
+  strategy: x509
+authorization:
+  mode: rbac
+ingress:
+  provider: none
