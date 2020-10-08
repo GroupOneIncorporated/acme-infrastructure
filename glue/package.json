@@ -1,22 +1,30 @@
 {
-  "name": "glue",
+  "name": "terraglue",
   "version": "1.0.0",
-  "description": "Glue script for Terraform - Ansible - rke configs.",
-  "main": "app.js",
+  "description": "Smart little app constructing config files for tools like Ansible, rke, etc from Terraform provisioned resources.",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node src/app.js",
+    "lint": "npx eslint . || exit 0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GroupOneIncorporated/acme-infrastructure.git"
+    "url": "https://github.com/brocahontaz/terraglue.git"
   },
+  "keywords": [
+    "terraform",
+    "ansible",
+    "rke",
+    "config",
+    "terraglue"
+  ],
   "author": "Johan Andersson",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GroupOneIncorporated/acme-infrastructure/issues"
+    "url": "https://github.com/brocahontaz/terraglue/issues"
   },
-  "homepage": "https://github.com/GroupOneIncorporated/acme-infrastructure#readme",
+  "homepage": "https://github.com/brocahontaz/terraglue#readme",
   "devDependencies": {
     "@lnu/eslint-config": "^1.1.0",
     "eslint": "^7.10.0",
@@ -28,5 +36,9 @@
   },
   "eslintConfig": {
     "extends": "@lnu"
+  },
+  "type": "module",
+  "dependencies": {
+    "js-yaml": "^3.14.0"
   }
 }

@@ -1,0 +1,52 @@
+{
+  "tfstatePath": "~/repos/acme-infrastructure/terraform/terraform.tfstate",
+  "nodeTypes": [
+    {
+      "name": "k8s_master",
+      "isMaster": true,
+      "user": "debian"
+    },
+    {
+      "name": "k8s_node",
+      "isMaster": false,
+      "user": "debian"
+    }
+  ],
+  "ssh": {
+    "configPath": "~/repos/acme-infrastructure/configs/ssh_config",
+    "user": "debian"
+  },
+  "ansible": {
+    "hostsPath": "~/repos/acme-infrastructure/ansible/hosts"
+  },
+  "rke": {
+    "configPath": "~/repos/acme-infrastructure/rke/cluster.yaml",
+    "config": {
+      "nodes": [],
+      "services": {
+        "etcd": {
+          "snapshot": "true",
+          "creation": "6h",
+          "retention": "24h"
+        },
+        "kubelet": {
+          "extra_args": {
+            "cloud-provider": "external"
+          }
+        }
+      },
+      "network": {
+        "plugin": "canal"
+      },
+      "authentication": {
+        "strategy": "x509"
+      },
+      "authorization": {
+        "mode": "rbac"
+      },
+      "ingress": {
+        "provider": "none"
+      }
+    }
+  }
+}
