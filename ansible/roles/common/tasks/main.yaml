@@ -1,0 +1,26 @@
+---
+- name: Install docker
+  include: docker.yaml
+
+- name: apt upgrade
+  become: yes
+  apt:
+    upgrade: safe
+    cache_valid_time: 3600
+    update_cache: yes
+    state: present
+
+- name: Install some nice and useful tools
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    state: present
+    name:
+      - htop
+
+- name: Add developers keys to authorized_keys
+  authorized_key:
+    user: "{{ansible_user_id}}"
+    state: present
+    key: "{{ lookup('file', 'authorized_keys') }}"
