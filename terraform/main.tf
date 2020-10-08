@@ -4,9 +4,15 @@ resource "openstack_compute_keypair_v2" "my-cloud-key" {
   name = "jd222qf_Keypair"
 }
 
-resource "openstack_networking_network_v2" "my-network" {
-  name           = "my-network"
+resource "openstack_networking_network_v2" "internal-network" {
+  name           = "internal-network"
   admin_state_up = "true"
+}
+
+resource "openstack_networking_subnet_v2" "internal-subnet" {
+  name       = "internal-subnet"
+  network_id = openstack_networking_network_v2.internal-network.id
+  cidr       = "192.168.199.0/24"
 }
 
 resource "openstack_compute_instance_v2" "test" {
@@ -19,6 +25,6 @@ resource "openstack_compute_instance_v2" "test" {
   availability_zone_hints = "Education"
 
   network {
-    name = "my-network"
+    name = "internal-network"
   }
 }
