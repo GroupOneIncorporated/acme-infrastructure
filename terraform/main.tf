@@ -34,6 +34,22 @@ resource "openstack_networking_router_interface_v2" "router-1-interface" {
 }
 
 
+// ---------- SECURITY GROUPS ----------
+resource "openstack_networking_secgroup_v2" "secgroup_ssh" {
+  name        = "secgroup_ssh"
+}
+
+resource "openstack_networking_secgroup_rule_v2" "secgroup_rule_1" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = 22
+  port_range_max    = 22
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.secgroup_ssh.id
+}
+
+
 // ---------- INSTANCES ----------
 resource "openstack_compute_instance_v2" "test" {
   name            = "test-vm"
@@ -42,7 +58,7 @@ resource "openstack_compute_instance_v2" "test" {
   //count = ...
   # Using the keypair resource previously created
   key_pair        = openstack_compute_keypair_v2.my-cloud-key.name
-  security_groups = ["default"]
+  security_groups = ["default", "secgroup_ssh"]
   availability_zone_hints = "Education"
 
   network {
@@ -67,6 +83,7 @@ resource "openstack_compute_floatingip_associate_v2" "float-ip-associate" {
   instance_id = openstack_compute_instance_v2.test.id
   floating_ip = openstack_networking_floatingip_v2.float-ip.address
 }
+
 
 
 
