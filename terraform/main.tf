@@ -1,8 +1,12 @@
+provider "openstack" {
+  version = "~> 1.32"
+}
+
 // ---------- KEY PAIR ----------
+# using newly created key/pair
 resource "openstack_compute_keypair_v2" "my-cloud-key" {
-  # Keypair on Openstack imported into the state file using "terraform import"
-  # Doc: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/compute_keypair_v2#import
-  name = "jd222qf_Keypair"
+  name = "my-2dv517-keypair"
+  public_key = chomp(file(var.public_key_path))
 }
 
 
@@ -35,20 +39,28 @@ resource "openstack_networking_router_interface_v2" "router-1-interface" {
 
 
 // ---------- SECURITY GROUPS ----------
-resource "openstack_networking_secgroup_v2" "secgroup_ssh" {
-  name        = "secgroup_ssh"
+resource "openstack_networking_secgroup_v2" "secgroup_1" {
+  name        = "secgroup_1"
+  description = "instance security group"
 }
 
-resource "openstack_networking_secgroup_rule_v2" "secgroup_rule_1" {
+resource "openstack_networking_secgroup_rule_v2" "secgroup_rule_ssh" {
   direction         = "ingress"
   ethertype         = "IPv4"
   protocol          = "tcp"
   port_range_min    = 22
   port_range_max    = 22
   remote_ip_prefix  = "0.0.0.0/0"
-  security_group_id = openstack_networking_secgroup_v2.secgroup_ssh.id
+  security_group_id = openstack_networking_secgroup_v2.secgroup_1.id
 }
 
+resource "openstack_networking_secgroup_rule_v2" "secgroup_rule_ICMP" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "icmp"
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.secgroup_1.id
+}
 
 // ---------- INSTANCES ----------
 resource "openstack_compute_instance_v2" "test" {
@@ -58,7 +70,7 @@ resource "openstack_compute_instance_v2" "test" {
   //count = ...
   # Using the keypair resource previously created
   key_pair        = openstack_compute_keypair_v2.my-cloud-key.name
-  security_groups = ["default", "secgroup_ssh"]
+  security_groups = ["default", "secgroup_1"]
   availability_zone_hints = "Education"
 
   network {
