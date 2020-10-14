@@ -10,6 +10,7 @@ resource "openstack_compute_keypair_v2" "k8s" {
 }
 
 # -- Networking -- #
+
 // Security groups
 resource "openstack_networking_secgroup_v2" "k8s_secgroup" {
   name        = "k8s_secgroup"
@@ -57,7 +58,6 @@ resource "openstack_networking_secgroup_rule_v2" "k8s_rule_udp" {
   remote_ip_prefix  = "0.0.0.0/0"
   security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
 }
-
 
 // Internal network
 resource "openstack_networking_network_v2" "k8s_network" {

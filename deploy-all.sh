@@ -15,9 +15,16 @@ cd terraform
 terraform init
 terraform apply
 
+# Glue
+cd ../glue
+npm start
 
 # Ansible
 cd ../ansible
-# Whatever we need to do here in the next step.
+ansible-playbook -i hosts site.yaml
+
+# rke
+cd ../rke
+rke up
 
 echo "Infrastructure deployed successfully."
