@@ -16,6 +16,8 @@ nodes:
     internal_address: 192.168.199.11
     role:
       - worker
+    labels: ''
+    taints: []
     hostname_override: k8s-node-1
     user: debian
 services:
