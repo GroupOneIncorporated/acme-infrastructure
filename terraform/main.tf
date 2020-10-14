@@ -16,17 +16,18 @@ resource "openstack_networking_secgroup_v2" "k8s_secgroup" {
   description = "k8s cluster security group"
 }
 
+// SSH
 resource "openstack_networking_secgroup_rule_v2" "k8s_rule_ssh" {
   direction         = "ingress"
   ethertype         = "IPv4"
   protocol          = "tcp"
   port_range_min    = 22
   port_range_max    = 22
-  remote_ip_prefix  = "0.0.0.0/0"
+  remote_ip_prefix  = "0.0.0.0/0" # Should probably be a whitelisted network ! SECURITY !
   security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
 }
 
-// Ping ICMP
+// Ping/ICMP
 resource "openstack_networking_secgroup_rule_v2" "k8s_rule_ICMP" {
   direction         = "ingress"
   ethertype         = "IPv4"
@@ -34,6 +35,29 @@ resource "openstack_networking_secgroup_rule_v2" "k8s_rule_ICMP" {
   remote_ip_prefix  = "0.0.0.0/0"
   security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
 }
+
+// TCP
+resource "openstack_networking_secgroup_rule_v2" "k8s_rule_tcp" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = 1
+  port_range_max    = 65535
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
+}
+
+// UDP 
+resource "openstack_networking_secgroup_rule_v2" "k8s_rule_udp" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "udp"
+  port_range_min    = 1
+  port_range_max    = 65535
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
+}
+
 
 // Internal network
 resource "openstack_networking_network_v2" "k8s_network" {
