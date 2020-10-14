@@ -1,0 +1,9 @@
+
+[tester]
+
+194.47.177.5
+
+[tester:vars]
+
+ansible_user=ubuntu
+ansible_ssh_private_key_file= ~/GroupOneInc.pem
