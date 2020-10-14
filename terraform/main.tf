@@ -10,6 +10,54 @@ resource "openstack_compute_keypair_v2" "k8s" {
 }
 
 # -- Networking -- #
+// Security groups
+resource "openstack_networking_secgroup_v2" "k8s_secgroup" {
+  name        = "k8s_secgroup"
+  description = "k8s cluster security group"
+}
+
+// SSH
+resource "openstack_networking_secgroup_rule_v2" "k8s_rule_ssh" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = 22
+  port_range_max    = 22
+  remote_ip_prefix  = "0.0.0.0/0" # Should probably be a whitelisted network ! SECURITY !
+  security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
+}
+
+// Ping/ICMP
+resource "openstack_networking_secgroup_rule_v2" "k8s_rule_ICMP" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "icmp"
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
+}
+
+// TCP
+resource "openstack_networking_secgroup_rule_v2" "k8s_rule_tcp" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = 1
+  port_range_max    = 65535
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
+}
+
+// UDP 
+resource "openstack_networking_secgroup_rule_v2" "k8s_rule_udp" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "udp"
+  port_range_min    = 1
+  port_range_max    = 65535
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
+}
+
 
 // Internal network
 resource "openstack_networking_network_v2" "k8s_network" {
@@ -23,6 +71,7 @@ resource "openstack_networking_subnet_v2" "k8s_subnet" {
   network_id = openstack_networking_network_v2.k8s_network.id
   cidr       = "192.168.199.0/24"
   ip_version = 4
+  dns_nameservers = ["194.47.199.41", "194.47.110.97"]
 }
 
 // Router for connecting internal network with the public
@@ -53,7 +102,7 @@ resource "openstack_compute_instance_v2" "k8s_master" {
     name = "k8s-network"
   }
 
-  security_groups = ["default"]
+  security_groups = ["default","k8s_secgroup"]
 
   depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
 }
@@ -90,7 +139,7 @@ resource "openstack_compute_instance_v2" "k8s_node" {
     name = "k8s-network"
   }
 
-  security_groups = ["default"]
+  security_groups = ["default","k8s_secgroup"]
 
   depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
 }
