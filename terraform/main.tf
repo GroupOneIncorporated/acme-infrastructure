@@ -10,6 +10,30 @@ resource "openstack_compute_keypair_v2" "k8s" {
 }
 
 # -- Networking -- #
+// Security groups
+resource "openstack_networking_secgroup_v2" "k8s_secgroup" {
+  name        = "k8s_secgroup"
+  description = "k8s cluster security group"
+}
+
+resource "openstack_networking_secgroup_rule_v2" "k8s_rule_ssh" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = 22
+  port_range_max    = 22
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
+}
+
+// Ping ICMP
+resource "openstack_networking_secgroup_rule_v2" "k8s_rule_ICMP" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "icmp"
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.k8s_secgroup.id
+}
 
 // Internal network
 resource "openstack_networking_network_v2" "k8s_network" {
@@ -54,7 +78,7 @@ resource "openstack_compute_instance_v2" "k8s_master" {
     name = "k8s-network"
   }
 
-  security_groups = ["default"]
+  security_groups = ["default","k8s_secgroup"]
 
   depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
 }
@@ -91,7 +115,7 @@ resource "openstack_compute_instance_v2" "k8s_node" {
     name = "k8s-network"
   }
 
-  security_groups = ["default"]
+  security_groups = ["default","k8s_secgroup"]
 
   depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
 }
