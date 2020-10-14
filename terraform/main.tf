@@ -23,6 +23,7 @@ resource "openstack_networking_subnet_v2" "k8s_subnet" {
   network_id = openstack_networking_network_v2.k8s_network.id
   cidr       = "192.168.199.0/24"
   ip_version = 4
+  dns_nameservers = ["194.47.199.41", "194.47.110.97"]
 }
 
 // Router for connecting internal network with the public
