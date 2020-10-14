@@ -17,7 +17,7 @@ terraform apply
 
 # Glue
 cd ../glue
-npm start
+npm start config.json
 
 # Ansible
 cd ../ansible
