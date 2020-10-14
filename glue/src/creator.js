@@ -63,6 +63,7 @@ docker_version="5:19.03.*"
       sshConfigFile += `Host ${host.name}
 HostName ${host.ip}
 User ${host.user}
+IdentityFile ~/.ssh/GroupOneInc.pem
 
 `
     })
