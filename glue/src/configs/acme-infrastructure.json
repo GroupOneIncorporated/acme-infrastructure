@@ -1,5 +1,5 @@
 {
-  "tfstatePath": "~/repos/acme-infrastructure/terraform/terraform.tfstate",
+  "tfstatePath": "../terraform/terraform.tfstate",
   "nodeTypes": [
     {
       "name": "k8s_master",
@@ -13,14 +13,14 @@
     }
   ],
   "ssh": {
-    "configPath": "~/repos/acme-infrastructure/configs/ssh_config",
+    "configPath": "../configs/ssh_config",
     "user": "debian"
   },
   "ansible": {
-    "hostsPath": "~/repos/acme-infrastructure/ansible/hosts"
+    "hostsPath": "../ansible/hosts"
   },
   "rke": {
-    "configPath": "~/repos/acme-infrastructure/rke/cluster.yaml",
+    "configPath": "../rke/cluster.yaml",
     "config": {
       "nodes": [],
       "services": {
