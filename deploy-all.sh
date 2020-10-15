@@ -27,5 +27,7 @@ ansible-playbook -i hosts site.yaml
 # rke
 cd ../rke
 rke up
+export KUBECONFIG=$(pwd)/kube_config_cluster.yml
+#export KUBECONFIG=$KUBECONFIG:$(pwd)/kube_config_cluster.yml
 
 echo "Infrastructure deployed successfully."
