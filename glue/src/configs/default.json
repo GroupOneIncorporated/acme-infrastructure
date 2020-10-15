@@ -20,7 +20,7 @@
     "hostsPath": "~/repos/acme-infrastructure/ansible/hosts"
   },
   "rke": {
-    "configPath": "~/repos/acme-infrastructure/rke/cluster.yaml",
+    "configPath": "~/repos/acme-infrastructure/rke/cluster.yml",
     "config": {
       "nodes": [],
       "services": {
