@@ -84,16 +84,17 @@ function _createRKENode (host) {
     address: host.ip,
     internal_address: host.internalAddress,
     role: host.isMaster ? ['controlplane', 'etcd'] : ['worker'],
-    labels: host.isMaster ? {
-      'node-role.kubernetes.io/master': true
-    } : '',
-    taints: host.isMaster ? [{
+    hostname_override: host.name,
+    user: host.user
+  }
+
+  if (host.isMaster) {
+    rkeNode.labels = { 'node-role.kubernetes.io/master': true }
+    rkeNode.taints = [{
       key: 'node-role.kubernetes.io/master',
       value: true,
       effect: 'NoSchedule'
-    }] : [],
-    hostname_override: host.name,
-    user: host.user
+    }]
   }
 
   return rkeNode
