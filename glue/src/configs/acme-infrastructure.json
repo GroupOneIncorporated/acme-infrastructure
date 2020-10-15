@@ -22,6 +22,7 @@
   "rke": {
     "configPath": "../rke/cluster.yml",
     "config": {
+      "ssh_key_path":"~/.ssh/GroupOneInc.pem",
       "nodes": [],
       "services": {
         "etcd": {
