@@ -20,6 +20,9 @@ cd ../glue
 npm install
 npm start acme-infrastructure.json
 
+# SSH config copy
+cp ../configs/ssh_config ~/.ssh/config
+
 # Ansible
 # This is a temporary fix for host key checking
 export ANSIBLE_HOST_KEY_CHECKING=false
