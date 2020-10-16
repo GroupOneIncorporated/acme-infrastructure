@@ -21,6 +21,8 @@ npm install
 npm start acme-infrastructure.json
 
 # Ansible
+# This is a temporary fix for host key checking
+export ANSIBLE_HOST_KEY_CHECKING=false
 cd ../ansible
 ansible-playbook -i hosts site.yaml
 
