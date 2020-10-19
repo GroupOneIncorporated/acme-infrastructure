@@ -4,11 +4,17 @@
   become: true
   tasks:
 
-  - name: update repo index
-    apt:
-      update_cache: yes
+  - name: download node_exporter
+    get_url:
+      url: https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz
+      dest: ./
 
-  - name: install apache2
-    apt:
-      name: apache2
-      state: latest
+  - name: unpack node_exporter
+    shell: | 
+      tar -xzf node_exporter-1.0.1.linux-amd64.tar.gz
+      mv node_exporter-1.0.1.linux-amd64 node_exporter
+
+  - name: run node_exporter
+    shell: |
+      cd ./node_exporter
+      ./node_exporter #OBS: will freez
