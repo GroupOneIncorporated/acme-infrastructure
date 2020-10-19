@@ -18,6 +18,7 @@ ingress:
 
 # ---Internal services---
 
+wordpress: {}
 
 # ---External services---
 
