@@ -43,8 +43,8 @@
           serviceAccountName: cloud-controller-manager
           containers:
             - name: openstack-cloud-controller-manager
-              #image: docker.io/k8scloudprovider/openstack-cloud-controller-manager:latest
-              image: docker.io/k8scloudprovider/openstack-cloud-controller-manager:v1.18.1
+              image: docker.io/k8scloudprovider/openstack-cloud-controller-manager:latest
+              #image: docker.io/k8scloudprovider/openstack-cloud-controller-manager:v1.18.1
               args:
                 - /bin/openstack-cloud-controller-manager
                 - --v=1
@@ -53,7 +53,7 @@
                 - --use-service-account-credentials=true
                 - --address=127.0.0.1
               volumeMounts:
-                - mountPath: /etc/kubernetes/ssl
+                - mountPath: /etc/kubernetes/pki
                   name: k8s-certs
                   readOnly: true
                 - mountPath: /etc/ssl/certs
@@ -71,7 +71,7 @@
           hostNetwork: true
           volumes:
           - hostPath:
-              path: /etc/kubernetes/ssl
+              path: /etc/kubernetes/pki
               type: DirectoryOrCreate
             name: k8s-certs
           - hostPath:

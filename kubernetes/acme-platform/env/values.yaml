@@ -1,0 +1,34 @@
+# Values to be injected into the acme wordpress platform umbrella chart.
+# Namespace = acme
+# Use this file to specify namespace-specific values.
+# Enable/disable services by setting the "enabled" flag.
+
+resources: {}
+
+# ---Ingress resource for routing and certificates---
+#
+# Set production flag to true to use real certificates from letsencrypt.
+# Otherwise letsencrypt staging server will be used.
+ingress:
+  enabled: true
+  production: false
+  spec:
+    hosts:
+      - control-panel: 
+          hostName: acme-wordpress.rooter.se
+          secretName: acme-wordpress-cert
+          serviceName: wordpress
+          servicePort: 80
+
+# ---Internal services---
+
+wordpress: {}
+
+# ---External services---
+
+nginx-ingress-controller:
+  replicaCount: 1
+  service: 
+    type: LoadBalancer
+    loadBalancerIP: 46.254.15.72
+    externalTrafficPolicy: "Cluster"

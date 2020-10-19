@@ -11,8 +11,8 @@ ingress:
   spec:
     hosts:
       - wordpress: 
-          hostName: acme.rooter.se
-          secretName: wordpress-cert
+          hostName: acme-wordpress.rooter.se
+          secretName: acme-wordpress-cert
           serviceName: wordpress
           servicePort: 80
 
