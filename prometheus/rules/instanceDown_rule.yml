@@ -1,0 +1,9 @@
+groups:
+  - name: instanceDown_rule
+    rules:
+      - alert: InstanceDown
+        expr: up == 0
+        labels:
+          serverity: critical problem
+        annotations:
+          summary: "Instance down"
