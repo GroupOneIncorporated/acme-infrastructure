@@ -1,0 +1,23 @@
+apiVersion: v2
+name: wordpress-platform
+description: Kubernetes deployment of the acme wordpress platform.
+type: application
+version: 0.1.0
+appVersion: 1.16.0
+deprecated: false
+maintainers:
+    - name: Johan Andersson
+      email: johan@rooter.se
+      url: www.rooter.se
+    - name: Kevin Cederholm
+    - name: Gabriel Björlin
+    - name: José Barroca
+keywords:
+  - acme
+  - wordpress
+  - mysql
+  - mariadb
+  - containers
+  - microservices
+  - 2dv517
+dependencies:
