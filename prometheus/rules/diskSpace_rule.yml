@@ -1,0 +1,27 @@
+groups:
+  - name: Instance_rules
+    rules:
+      - alert: Disk_space_15%_free
+        expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 15
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Instance has less than 15% free disk space"
+      
+      - alert: high_cpu_load
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High cpu load"
+          description: "Instance is under high load, the avg load 1m is at {{ $value }}."
+
+      - alert: low_on_memory
+        expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 15
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Memory is at less than 15%"
