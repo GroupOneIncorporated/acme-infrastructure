@@ -7,19 +7,14 @@ alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      # - alertmanager:9093
+      - localhost:9093
 
 rule_files:
   - "./rules/instanceDown_rule.yml"
-  - "./rules/diskSpace_rule.yml"
+  - "./rules/instance_rules.yml"
 
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
 scrape_configs:
   - job_name: 'prometheus'
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
 
     static_configs:
     - targets: ['localhost:9090']
