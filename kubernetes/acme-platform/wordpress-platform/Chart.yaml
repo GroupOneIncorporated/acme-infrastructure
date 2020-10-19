@@ -21,3 +21,6 @@ keywords:
   - microservices
   - 2dv517
 dependencies:
+  - name: wordpress
+    version: 9.6.9
+    repository: https://charts.bitnami.com/bitnami
