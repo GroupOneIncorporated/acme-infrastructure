@@ -7,5 +7,5 @@ variable "num_k8s_masters" {
 }
 
 variable "num_k8s_nodes" {
-  default = 1
+  default = 5
 }

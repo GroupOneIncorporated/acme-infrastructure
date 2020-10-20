@@ -143,19 +143,3 @@ resource "openstack_compute_instance_v2" "k8s_node" {
 
   depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
 }
-
-// Floating IP
-resource "openstack_networking_floatingip_v2" "k8s_node" {
-  count = var.num_k8s_nodes
-  pool  = "public"
-}
-
-// Floating IP associate
-resource "openstack_compute_floatingip_associate_v2" "k8s_node" {
-  count       = var.num_k8s_nodes
-  instance_id = element(openstack_compute_instance_v2.k8s_node.*.id, count.index)
-  floating_ip = element(
-    openstack_networking_floatingip_v2.k8s_node.*.address,
-    count.index,
-  )
-}
