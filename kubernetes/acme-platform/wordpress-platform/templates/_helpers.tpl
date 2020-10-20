@@ -60,3 +60,11 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "issuer" -}}
+{{- if .Values.ingress.production -}}
+cert-manager.io/cluster-issuer: "letsencrypt-prod"
+{{- else -}}
+cert-manager.io/cluster-issuer: "letsencrypt-staging"
+{{- end -}}
+{{- end -}}

@@ -15,14 +15,45 @@ ingress:
   spec:
     hosts:
       - control-panel: 
-          hostName: acme-wordpress.rooter.se
+          hostName: cscloud7-61.lnu.se
           secretName: acme-wordpress-cert
           serviceName: wordpress
           servicePort: 80
 
 # ---Internal services---
 
-wordpress: {}
+wordpress:
+  nameOverride: wordpress
+  fullnameOverride: wordpress
+  wordpressUsername: admin
+  wordpressPassword: supersecretpassword123
+  wordpressEmail: johan@rooter.se
+  wordpressFirstName: Johan
+  wordpressLastName: Andersson
+  wordpressBlogName: ACME
+  replicaCount: 3
+  service:
+    type: ClusterIP
+  persistence:
+    enabled: true
+    storageClass: sql-gold
+    accesMode: ReadWriteOnce
+    size: 8G
+  mariadb:
+    enabled: true
+    db:
+      name: acme
+      user: admin
+      password: supersecretpassword123
+      rootUser:
+        password: supersecretpassword123
+    master:
+      persistence: 
+        enabled: true
+        storageClass: sql-gold
+        #accessModes: ReadWriteOnce
+        size: 8G
+
 
 # ---External services---
 
@@ -30,5 +61,5 @@ nginx-ingress-controller:
   replicaCount: 1
   service: 
     type: LoadBalancer
-    loadBalancerIP: 46.254.15.72
+    loadBalancerIP: 194.47.177.61
     externalTrafficPolicy: "Cluster"
