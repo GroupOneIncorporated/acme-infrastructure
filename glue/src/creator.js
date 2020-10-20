@@ -98,7 +98,7 @@ IdentityFile ~/.ssh/GroupOneInc.pem
  */
 function _createRKENode (host) {
   const rkeNode = {
-    address: host.ip,
+    address: host.ip === '' ? host.internalAddress : host.ip,
     internal_address: host.internalAddress,
     role: host.isMaster ? ['controlplane', 'etcd'] : ['worker'],
     hostname_override: host.name,
