@@ -28,6 +28,9 @@ sudo rm -rf prometheus-2.8.0.linux-amd64*
 echo "Moving prometheus.yml to /etc/prometheus/"
 sudo mv prometheus.yml /etc/prometheus/prometheus.yml
 
+echo "Moving rules"
+sudo mv rules/ /etc/prometheus/rules/
+
 echo "Applying permissions to prometheus.yml"
 sudo chown prometheus:prometheus /etc/prometheus/prometheus.yml
 
