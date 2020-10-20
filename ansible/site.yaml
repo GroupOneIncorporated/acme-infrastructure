@@ -1,3 +1,13 @@
+- name: Init checks
+  hosts: all
+  gather_facts: no
+  tasks:
+  - name: Waiting for hosts to go online (120s timeout)
+    wait_for_connection:
+      timeout: 120
+  - name: Gather facts
+    setup:
+       
 - name: "Role: common"
   hosts: all
   roles:
