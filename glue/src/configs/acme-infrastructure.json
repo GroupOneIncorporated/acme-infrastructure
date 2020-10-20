@@ -47,6 +47,11 @@
       },
       "ingress": {
         "provider": "none"
+      },
+      "bastion_host": {
+        "address":"k8s-master-1",
+        "user":"debian",
+        "port": 22
       }
     }
   }
