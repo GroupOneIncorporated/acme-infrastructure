@@ -27,6 +27,17 @@ export default class Creator {
     this.hosts.forEach(host => {
       const rkeNode = _createRKENode(host)
       this.rke.config.nodes.push(rkeNode)
+
+      // Ugliest fix of all time
+      if (this.rke.bastionHost) {
+        if (this.rke.bastionHost.host === host.name) {
+          this.rke.config.BastionHost = {
+            address: host.ip,
+            user: this.rke.bastionHost.user,
+            port: this.rke.bastionHost.port
+          }
+        }
+      }
     })
     fs.writeFileSync(this.rke.configPath, yaml.safeDump(this.rke.config))
   }

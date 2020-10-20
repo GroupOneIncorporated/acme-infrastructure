@@ -21,6 +21,11 @@
   },
   "rke": {
     "configPath": "../rke/cluster.yml",
+    "bastionHost": {
+      "host": "k8s-master-1",
+      "user": "debian",
+      "port": 22
+    },
     "config": {
       "ssh_key_path":"~/.ssh/GroupOneInc.pem",
       "nodes": [],
