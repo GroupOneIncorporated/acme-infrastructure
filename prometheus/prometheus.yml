@@ -10,7 +10,6 @@ alerting:
       - localhost:9093
 
 rule_files:
-  - "./rules/instanceDown_rule.yml"
   - "./rules/instance_rules.yml"
 
 scrape_configs:
