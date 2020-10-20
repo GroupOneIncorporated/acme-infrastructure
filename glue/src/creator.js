@@ -60,9 +60,15 @@ docker_version="5:19.03.*"
   createSSHConfig () {
     let sshConfigFile = ''
     this.hosts.forEach(host => {
-      sshConfigFile += `Host ${host.name}
-HostName ${host.ip}
-User ${host.user}
+      sshConfigFile += `Host ${host.name}\n`
+      if (host.ip === '') {
+        sshConfigFile +=
+          'ProxyJump k8s-master-1\n' +
+          `HostName ${host.internalAddress}\n`
+      } else {
+        sshConfigFile += `HostName ${host.ip}\n`
+      }
+      sshConfigFile += `User ${host.user}
 IdentityFile ~/.ssh/GroupOneInc.pem
 
 `
