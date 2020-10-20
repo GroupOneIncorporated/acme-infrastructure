@@ -31,7 +31,7 @@ export default class Creator {
       // Ugliest fix of all time
       if (this.rke.bastionHost) {
         if (this.rke.bastionHost.host === host.name) {
-          this.rke.config.BastionHost = {
+          this.rke.config.bastion_host = {
             address: host.ip,
             user: this.rke.bastionHost.user,
             port: this.rke.bastionHost.port
