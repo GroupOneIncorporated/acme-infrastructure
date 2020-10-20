@@ -10,7 +10,7 @@ resources: {}
 # Set production flag to true to use real certificates from letsencrypt.
 # Otherwise letsencrypt staging server will be used.
 ingress:
-  enabled: true
+  enabled: false
   production: false
   spec:
     hosts:
@@ -32,12 +32,30 @@ wordpress:
   wordpressLastName: Andersson
   wordpressBlogName: ACME
   replicaCount: 1
+  allowOverrideNone: yes
+  htaccessPersistenceEnabled: yes
   service:
     type: ClusterIP
     externalTrafficPolicy: Cluster
+    #loadBalancerSourceRanges: [194.47.177.61]
+  ingress: 
+    enabled: true
+    certManager: true
+    hostname: "acme-wordpress.rooter.se"
+    annotations: 
+      kubernetes.io/ingress.class: "nginx"
+      cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    tls: true
+    extraHosts:
+      - name: "acme-wordpress.rooter.se"
+        path: /
+    extraTls:
+      - hosts:
+          - acme-wordpress.rooter.se
+        secretName: wordpress.local-tls
   persistence:
     enabled: true
-    storageClass: sql-gold
+    storageClass: wp-gold
     accesMode: ReadWriteOnce
     size: 8G
   mariadb:
