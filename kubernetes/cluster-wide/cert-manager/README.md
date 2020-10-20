@@ -8,6 +8,10 @@ kubectl create namespace cert-manager
 
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.0/cert-manager.yaml
 
+## Delete
+
+kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.0.0/cert-manager.yaml
+
 ## 3 Confirm installation
 
 kubectl apply -f test-resources.yaml

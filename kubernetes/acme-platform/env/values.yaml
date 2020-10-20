@@ -14,8 +14,8 @@ ingress:
   production: false
   spec:
     hosts:
-      - control-panel: 
-          hostName: cscloud7-61.lnu.se
+      - wordpress: 
+          hostName: acme-wordpress.rooter.se
           secretName: acme-wordpress-cert
           serviceName: wordpress
           servicePort: 80
@@ -31,9 +31,10 @@ wordpress:
   wordpressFirstName: Johan
   wordpressLastName: Andersson
   wordpressBlogName: ACME
-  replicaCount: 3
+  replicaCount: 1
   service:
     type: ClusterIP
+    externalTrafficPolicy: Cluster
   persistence:
     enabled: true
     storageClass: sql-gold
@@ -41,19 +42,24 @@ wordpress:
     size: 8G
   mariadb:
     enabled: true
+    replication:
+      enabled: false
     db:
-      name: acme
-      user: admin
-      password: supersecretpassword123
+      #name: acme
+      #user: admin
+      #password: supersecretpassword123
       rootUser:
         password: supersecretpassword123
     master:
       persistence: 
         enabled: true
         storageClass: sql-gold
-        #accessModes: ReadWriteOnce
+        accessModes: [ReadWriteOnce]
         size: 8G
-
+    volumePermissions:
+      enabled: true
+    auth:
+      rootPassword: supersecretpassword123
 
 # ---External services---
 

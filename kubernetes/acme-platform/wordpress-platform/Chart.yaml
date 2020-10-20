@@ -22,8 +22,10 @@ keywords:
   - 2dv517
 dependencies:
   - name: wordpress
-    version: 9.6.9
+    version: 9.8.0
     repository: https://charts.bitnami.com/bitnami
+  #- name: mariadb
+    #version: 
   - name: nginx-ingress-controller
     version: 5.5.1
     repository: https://charts.bitnami.com/bitnami
