@@ -26,16 +26,16 @@ sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries
 sudo rm -rf prometheus-2.8.0.linux-amd64*
 
 echo "Moving prometheus.yml to /etc/prometheus/"
-sudo mv prometheus.yml /etc/prometheus/prometheus.yml
+sudo cp prometheus.yml /etc/prometheus/prometheus.yml
 
 echo "Moving rules"
-sudo mv rules/ /etc/prometheus/rules/
+sudo cp rules/ /etc/prometheus/rules/
 
 echo "Applying permissions to prometheus.yml"
 sudo chown prometheus:prometheus /etc/prometheus/prometheus.yml
 
 echo "Moving prometheus.service to /etc/systemd/system/"
-sudo mv prometheus.service /etc/systemd/system/prometheus.service
+sudo cp prometheus.service /etc/systemd/system/prometheus.service
 
 echo "reloading and starting systemctl"
 sudo systemctl daemon-reload
