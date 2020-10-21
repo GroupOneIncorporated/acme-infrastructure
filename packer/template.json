@@ -22,7 +22,10 @@
         ],
       "networks": [
         "***list of networks by UUID to attach to this instance"
-        ]
+        ],
+      "ssh_username": "debian",
+      "ssh_keypair_name": "k8s-keys",
+      "ssh_private_key_file": "~/.ssh/GroupOneInc"
     }
   ],
 
