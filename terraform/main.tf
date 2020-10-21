@@ -159,3 +159,27 @@ resource "openstack_compute_floatingip_associate_v2" "k8s_node" {
     count.index,
   )
 }
+
+// ------------------------------------------------------------
+// Packer image-based instance
+resource "openstack_compute_instance_v2" "from_image" {
+  name        = "from_image"
+  image_name  = "test-instance"
+  flavor_name = "c2-r4-d20"
+  key_pair    = openstack_compute_keypair_v2.k8s.name
+  availability_zone_hints = "Education"
+  network {
+    name = "k8s-network"
+  }
+  security_groups = ["default","k8s_secgroup"]
+  depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
+}
+
+resource "openstack_networking_floatingip_v2" "from_image" {
+  pool  = "public"
+}
+
+resource "openstack_compute_floatingip_associate_v2" "from_image" {
+  instance_id = openstack_compute_instance_v2.from_image.id
+  floating_ip = openstack_networking_floatingip_v2.from_image.address
+}
