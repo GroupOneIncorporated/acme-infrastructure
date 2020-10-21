@@ -1,6 +1,9 @@
 dependencies:
+- name: wordpress
+  repository: https://charts.bitnami.com/bitnami
+  version: 9.8.0
 - name: nginx-ingress-controller
   repository: https://charts.bitnami.com/bitnami
   version: 5.5.1
-digest: sha256:fc3d4c6402b857e13f7b88b9da3dde9c90c6b81bf269d02cfe7fa18638a4f222
-generated: "2020-10-20T15:43:35.229892829+02:00"
+digest: sha256:91a8d44e12952a1739dd44f259e6d57a856412b1a42e882cf3e79127f4ebe7bd
+generated: "2020-10-20T16:31:25.248003709+02:00"

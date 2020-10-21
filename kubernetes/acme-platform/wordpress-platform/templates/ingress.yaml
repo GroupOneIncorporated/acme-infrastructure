@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "wordpress-platform.labels" . | nindent 4 }}
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: "nginx"
     {{ include "issuer" . }}
 spec:
   tls:

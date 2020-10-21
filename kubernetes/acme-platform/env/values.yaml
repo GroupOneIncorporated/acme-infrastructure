@@ -10,14 +10,19 @@ resources: {}
 # Set production flag to true to use real certificates from letsencrypt.
 # Otherwise letsencrypt staging server will be used.
 ingress:
-  enabled: false
+  enabled: true
   production: false
   spec:
     hosts:
-      - wordpress: 
-          hostName: acme-wordpress.rooter.se
-          secretName: acme-wordpress-cert
-          serviceName: wordpress
+      #- wordpress: 
+      #    hostName: acme-wordpress.rooter.se
+      #    secretName: acme-wordpress-cert
+      #    serviceName: wordpress
+      #    servicePort: 80
+      - nodetest:
+          hostName: nodetest.rooter.se
+          secretName: nodetest-cert
+          serviceName: nodetest
           servicePort: 80
 
 # ---Internal services---
@@ -32,27 +37,27 @@ wordpress:
   wordpressLastName: Andersson
   wordpressBlogName: ACME
   replicaCount: 1
-  allowOverrideNone: yes
-  htaccessPersistenceEnabled: yes
+  #allowOverrideNone: yes
+  #htaccessPersistenceEnabled: yes
   service:
     type: ClusterIP
     externalTrafficPolicy: Cluster
-    #loadBalancerSourceRanges: [194.47.177.61]
+    #loadBalancerIP: 194.47.177.61
   ingress: 
     enabled: true
-    certManager: true
+    certManager: false
     hostname: "acme-wordpress.rooter.se"
     annotations: 
       kubernetes.io/ingress.class: "nginx"
       cert-manager.io/cluster-issuer: "letsencrypt-staging"
-    tls: true
+    tls: false
     extraHosts:
       - name: "acme-wordpress.rooter.se"
         path: /
     extraTls:
       - hosts:
           - acme-wordpress.rooter.se
-        secretName: wordpress.local-tls
+        secretName: acme-wordpress.rooter.se-tls
   persistence:
     enabled: true
     storageClass: wp-gold
@@ -85,5 +90,5 @@ nginx-ingress-controller:
   replicaCount: 1
   service: 
     type: LoadBalancer
-    loadBalancerIP: 194.47.177.61
-    externalTrafficPolicy: "Cluster"
+    loadBalancerIP: 31.12.86.208
+    externalTrafficPolicy: Cluster
