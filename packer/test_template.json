@@ -1,0 +1,27 @@
+{
+  "_comment": "defines and configures the builders used to create machine images for this template",
+  "_comment1": "requires sourcing openrc.sh to get OS_USERNAME, OS_PASSWORD, OS_AUTH_URL, OS_REGION_NAME and OS_USER_DOMAIN_NAME",
+  "_comment2": "!!openrc.sh must export OS_TENANT_NAME and/or OS_TENANT_ID even if v3 is used (for openstack authorization of builder)",
+  "builders": [
+    {
+      "type": "openstack",
+      "image_name": "test-packer-image",
+      "source_image_name": "Debian 9",
+      "flavor": "c2-r2-d20",
+      "availability_zone": "Education",
+
+      "security_groups": [
+        "default",
+        "k8s_secgroup"
+        ],
+      "networks": [
+        "fd401e50-9484-4883-9672-a2814089528c",
+        "dfb1e3ea-613c-4d4f-bce1-6435043832d5"
+        ],
+      "ssh_username": "debian",
+      "ssh_keypair_name": "k8s-keys",
+      "ssh_private_key_file": "/Users/josebarroca/.ssh/GroupOneInc"
+    }
+  ]
+
+}
