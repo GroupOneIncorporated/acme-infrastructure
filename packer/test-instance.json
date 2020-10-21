@@ -1,6 +1,4 @@
 {
-  "_comment": "'make sure SSH is allowed in your default security group!'",
-  "_comment2": "instance is allocated to internal network, but the floating IPs pool is related to the public one...",
   "builders": [
     {
       "type": "openstack",
@@ -15,6 +13,19 @@
       "security_groups": [
         "default",
         "k8s_secgroup"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 5",
+        "sudo apt-get update",
+        "sudo apt-get install -y gcc python-setuptools python-dev",
+        "sudo easy_install pip",
+        "sudo pip install ansible",
+        "which ansible"
       ]
     }
   ]
