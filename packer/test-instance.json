@@ -9,7 +9,6 @@
       
       "networks": ["dfb1e3ea-613c-4d4f-bce1-6435043832d5"],
       "floating_ip_network": "fd401e50-9484-4883-9672-a2814089528c",
-      "reuse_ips": "true",
       "availability_zone": "Education",
       "security_groups": [
         "default",
@@ -26,15 +25,18 @@
     {
       "type": "shell",
       "inline":[
-        "echo \"deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main\" >> /etc/apt/source.list",
+        "sudo apt-get update",
+        "sudo apt-get -y install dirmngr --install-recommends",
+        "sudo bash -c \"echo 'deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main' >> /etc/apt/source.list\"",
         "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367",
         "sudo apt update",
-        "sudo apt install ansible",
+        "yes | sudo apt install ansible",
         "echo \"**** ANSIBLE LOCATION: $(which ansible) ****\"",
         
-        "sudo apt install git",
-        "git clone https://github.com/brocahontaz/terraglue /tmp/",
-        "cd /tmp/glue",
+        "yes | sudo apt install git",
+        "cd /tmp",
+        "git clone https://github.com/brocahontaz/terraglue /tmp/glue",
+        "cd glue",
         "echo \"**** installing GLUE ****\"",
         "npm install"
       ]
