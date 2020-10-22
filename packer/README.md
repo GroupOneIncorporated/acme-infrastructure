@@ -1,3 +1,20 @@
+# to create image:
+- install Packer
+- (create the infrastructure with terraform apply)
+- in packer directory, run 'packer build test-instance.json'
+
+Tasks currently in .json file:
+- create Debian 9 instance, attached to the infrastructure previously created by terraform
+- Copy ansible files to tmp folder
+- Install Ansible (requires installing dirmngr before)
+- Install git
+- Clone terraglue + npm install
+- TODO: Install rke
+- Copy acme-infrastructure.config (for glue) and run terraglue
+- TODO: run ansible playbooks
+
+
+
 - Creates an image on openstack of a Debian 9 and provisions it with Ansible
 - upated terraform/main.tf to launch an instance of this image
 
@@ -18,11 +35,13 @@ provisioners: https://www.packer.io/docs/provisioners
     - "script: path" to execute a script (or "scripts: path" for an array of paths)
   - type: ansible-local - executes a playbook on the path   
     - "playbook_file: path"
-- properties like 'pause_before' to specify amount of seconds to wait, 'timeout' to specify time to consider provisioning has failed (no timeout by default)
+- properties like 'pause_before' to specify amount of seconds to wait, 'timeout' to specify time to consider provisioning has failed (no timeout by default)...
+
+- ATTENTION! Sometimes openstack does not re-release the floating IP associated with an image-based instance! --> Maybe we'll need to add an "error-cleanup-provisioner" to perform some Openstack command to release unassigned floating IPs when destroying the instance. (tried adding "reuse_ips: true" do template.json file, did not work)
 
 ## 3) Post-processors
 
 
 - After everything is finished, an image is automatically created based on the running instance. When it finishes creating the image, it is automatically uploaded to openstack and instance itself is destroyed. Now the new image is available on Openstack, ready to be used by terraform.
 
-- ATTENTION! Openstack does not seem to re-release the floating IP associated with an image-based instance --> add some Openstack operation to release unassigned floating IPs when destroying the instance? (adding "reuse_ips: true" do template.json file did not work)
+
