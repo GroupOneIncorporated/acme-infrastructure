@@ -164,7 +164,7 @@ resource "openstack_compute_floatingip_associate_v2" "k8s_node" {
 // Packer image-based instance
 resource "openstack_compute_instance_v2" "from_image" {
   name        = "from_image"
-  image_name  = "test-instance"
+  image_name  = "GroupOneInc-Debian9-Docker"
   flavor_name = "c2-r4-d20"
   key_pair    = openstack_compute_keypair_v2.k8s.name
   availability_zone_hints = "Education"
