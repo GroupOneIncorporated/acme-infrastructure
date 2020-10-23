@@ -1,31 +1,27 @@
-# to create image:
-- install Packer
-- (create the infrastructure with terraform apply)
-- in packer directory, run 'packer build test-instance.json'
+Packer will build an instance and provision it according to the built .json file. When provisioning is complete, the instance is automatically saved as an image in openstack and the instance is destroyed.
 
-Tasks currently in .json file:
+## to create image:
+1) install Packer (https://learn.hashicorp.com/tutorials/packer/getting-started-install)
+2) Edit openrc.sh (Packer's opentsack provider still uses some v2 authentication variables even if we use a v3 RC file):
+  - Comment-our or remove 'unset OS_TENANT_NAME' and 'unset OS_TENANT_ID'
+  - Add 'export OS_TENANT_NAME=$OS_PROJECT_NAME' and 'export OS_TENANT_ID=$OS_PROJECT_ID'
+3) source openrc.sh
+(CHECK THE UUID VALUE in 'network' on /packer/debian9-docker.json, must match the UUID of our internal 'k8s-network', unfortunately the network's name can't be used)
+4) in /packer folder, run 'packer build debian9-docker.json'
+
+## tasks currently in the .json file to create the template
 - create Debian 9 instance, attached to the infrastructure previously created by terraform
-- Copy ansible files to tmp folder
-- Install Ansible (requires installing dirmngr before)
-- Install git
-- Clone terraglue + npm install
-- TODO: Install rke
-- Copy acme-infrastructure.config (for glue) and run terraglue
-- TODO: run ansible playbooks
+- use the 'ansible' provisioner to install docker
 
-
-
-- Creates an image on openstack of a Debian 9 and provisions it with Ansible
-- upated terraform/main.tf to launch an instance of this image
 
 # Structure of a Packer .json file:
-## 1) Builders 
+### 1) Builders 
 (https://www.packer.io/docs/templates/builderswith) 
 - different 'type's, specific to each cloud platform
 - creates the instance that is the base of the template
 - connects to it using SSH (uses a temporary discardable keypair, no need to configure keys for this)
 
-## 2) Provisioners 
+### 2) Provisioners 
 docs: https://www.packer.io/docs/templates/provisioners
 provisioners: https://www.packer.io/docs/provisioners
 - different 'type's for different ways of provisioning
@@ -33,15 +29,10 @@ provisioners: https://www.packer.io/docs/provisioners
   - type: shell - executes a local sh script on the instance
     - "inline: [command1, command2...]" to write bash commands
     - "script: path" to execute a script (or "scripts: path" for an array of paths)
-  - type: ansible-local - executes a playbook on the path   
+  - type: "ansible" executes a playbook on the path
     - "playbook_file: path"
 - properties like 'pause_before' to specify amount of seconds to wait, 'timeout' to specify time to consider provisioning has failed (no timeout by default)...
 
-- ATTENTION! Sometimes openstack does not re-release the floating IP associated with an image-based instance! --> Maybe we'll need to add an "error-cleanup-provisioner" to perform some Openstack command to release unassigned floating IPs when destroying the instance. (tried adding "reuse_ips: true" do template.json file, did not work)
+- ATTENTION! Sometimes openstack failed to re-release the floating IP associated with an image-based instance! --> Might be necessary adding an "error-cleanup-provisioner" to perform some Openstack command to release unassigned floating IPs when destroying the instance. (tried adding "reuse_ips: true" do template.json file, did not work).
 
-## 3) Post-processors
-
-
-- After everything is finished, an image is automatically created based on the running instance. When it finishes creating the image, it is automatically uploaded to openstack and instance itself is destroyed. Now the new image is available on Openstack, ready to be used by terraform.
-
-
+### 3) Post-processors

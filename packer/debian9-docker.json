@@ -1,0 +1,34 @@
+{
+  "builders": [
+    {
+      "type": "openstack",
+      "image_name": "GroupOneInc-Debian9-Docker",
+      "source_image_name": "Debian 9",
+      "flavor": "c2-r2-d20",
+      "ssh_username": "debian",
+      
+      "networks": ["335ce222-1ce2-4f1b-8628-5a6d65102222"],
+      "floating_ip_network": "fd401e50-9484-4883-9672-a2814089528c",
+      "availability_zone": "Education",
+      "security_groups": [
+        "default",
+        "k8s_secgroup"
+      ],
+
+      "image_visibility": "shared",
+      "image_members": [
+        "0edd1695d5864346994991b15eb88bec",
+        "3ca8e4e8fa9a4236b662310e79a9754b",
+        "51d4608b786e40d69614cb962773a4fc",
+        "a070e9c25a6e488d8ecd7366a0e6f63d"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "user": "debian",
+      "playbook_file": "../ansible/site.yaml"
+    }
+  ]
+}
