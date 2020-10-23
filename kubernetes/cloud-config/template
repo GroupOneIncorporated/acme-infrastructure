@@ -9,3 +9,4 @@ domain-name=Default
 [LoadBalancer]
 use-octavia=false
 lb-provider=haproxy
+manage-security-groups=true
