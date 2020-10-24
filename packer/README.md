@@ -6,8 +6,8 @@ Packer will build an instance and provision it according to the built .json file
   - Comment-our or remove 'unset OS_TENANT_NAME' and 'unset OS_TENANT_ID'
   - Add 'export OS_TENANT_NAME=$OS_PROJECT_NAME' and 'export OS_TENANT_ID=$OS_PROJECT_ID'
 3) source openrc.sh
-(CHECK THE UUID VALUE in 'network' on /packer/debian9-docker.json, must match the UUID of our internal 'k8s-network', unfortunately the network's name can't be used)
-4) in /packer folder, run 'packer build debian9-docker.json'
+4) Check that the UUID value in 'network' on /packer/debian9-docker.json matches the UUID of our internal 'k8s-network'
+5) in /packer folder, run 'packer build debian9-docker.json'
 
 ## tasks currently in the .json file to create the template
 - create Debian 9 instance, attached to the infrastructure previously created by terraform
