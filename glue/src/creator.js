@@ -27,6 +27,17 @@ export default class Creator {
     this.hosts.forEach(host => {
       const rkeNode = _createRKENode(host)
       this.rke.config.nodes.push(rkeNode)
+
+      // Ugliest fix of all time
+      if (this.rke.bastionHost) {
+        if (this.rke.bastionHost.host === host.name) {
+          this.rke.config.bastion_host = {
+            address: host.ip,
+            user: this.rke.bastionHost.user,
+            port: this.rke.bastionHost.port
+          }
+        }
+      }
     })
     fs.writeFileSync(this.rke.configPath, yaml.safeDump(this.rke.config))
   }
@@ -60,9 +71,15 @@ docker_version="5:19.03.*"
   createSSHConfig () {
     let sshConfigFile = ''
     this.hosts.forEach(host => {
-      sshConfigFile += `Host ${host.name}
-HostName ${host.ip}
-User ${host.user}
+      sshConfigFile += `Host ${host.name}\n`
+      if (host.ip === '') {
+        sshConfigFile +=
+          'ProxyJump k8s-master-1\n' +
+          `HostName ${host.internalAddress}\n`
+      } else {
+        sshConfigFile += `HostName ${host.ip}\n`
+      }
+      sshConfigFile += `User ${host.user}
 IdentityFile ~/.ssh/GroupOneInc.pem
 
 `
@@ -81,7 +98,7 @@ IdentityFile ~/.ssh/GroupOneInc.pem
  */
 function _createRKENode (host) {
   const rkeNode = {
-    address: host.ip,
+    address: host.ip === '' ? host.internalAddress : host.ip,
     internal_address: host.internalAddress,
     role: host.isMaster ? ['controlplane', 'etcd'] : ['worker'],
     hostname_override: host.name,

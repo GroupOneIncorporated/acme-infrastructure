@@ -75,9 +75,16 @@ export default class Parser {
     const parsedHosts = []
     nodes.forEach(node => {
       const instances = this.getNamedInstances(node.name)
-      const instanceIPs = this.getIPByInstanceName(node.name)
+      let instanceIPs = []
+      try {
+        instanceIPs = this.getIPByInstanceName(node.name)
+      } catch (error) {
+      }
       instances.forEach(instance => {
-        const ip = instanceIPs.filter(ip => ip.attributes.instance_id === instance.attributes.id)[0].attributes.floating_ip
+        let ip = ''
+        try {
+          ip = instanceIPs.filter(ip => ip.attributes.instance_id === instance.attributes.id)[0].attributes.floating_ip
+        } catch (ignored) {}
         parsedHosts.push({
           name: instance.attributes.name,
           user: node.user,
