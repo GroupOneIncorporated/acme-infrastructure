@@ -1,0 +1,25 @@
+# Default values file for the acme wordpress umbrella chart.
+# Using inheritance with the namespace-specific values files.
+# Do not override these defaults if you do not know what you are doing! This may affect ALL deployments.
+
+resources: {}
+
+# ---Ingress resource for routing and certificates---
+ingress:
+  enabled: false
+  production: false
+  spec:
+    hosts:
+      - wordpress: 
+          hostName: acme-wordpress.rooter.se
+          secretName: acme-wordpress-cert
+          serviceName: wordpress
+          servicePort: 80
+
+# ---Internal services---
+
+wordpress: {}
+
+# ---External services---
+
+nginx-ingress-controller: {}

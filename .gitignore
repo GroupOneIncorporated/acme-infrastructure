@@ -173,5 +173,8 @@ override.tf.json
 !.vscode/extensions.json
 *.code-workspace
 
+**/kube_config_cluster.yml
+**/cluster.rkestate
+
 # End of https://www.toptal.com/developers/gitignore/api/linux,vscode,ansible,helm,terraform,node
 n

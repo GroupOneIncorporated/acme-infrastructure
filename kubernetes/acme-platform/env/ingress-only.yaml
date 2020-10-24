@@ -1,0 +1,8 @@
+resources: {}
+
+nginx-ingress-controller:
+  replicaCount: 1
+  service: 
+    type: LoadBalancer
+    loadBalancerIP: 194.47.177.61
+    externalTrafficPolicy: "Cluster"

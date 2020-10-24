@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodetest
+  labels:
+    app: nodetest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodetest
+  template:
+    metadata:
+      labels:
+        app: nodetest
+    spec:
+      containers:
+        - name: nodetest
+          image: heroku/nodejs-hello-world
+          ports:
+            - name: http
+              containerPort: 80
+          env:  
+            - name: PORT
+              value: "80"
