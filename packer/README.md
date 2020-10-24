@@ -33,6 +33,6 @@ provisioners: https://www.packer.io/docs/provisioners
     - "playbook_file: path"
 - properties like 'pause_before' to specify amount of seconds to wait, 'timeout' to specify time to consider provisioning has failed (no timeout by default)...
 
-- ATTENTION! Sometimes openstack failed to re-release the floating IP associated with an image-based instance! --> Might be necessary adding an "error-cleanup-provisioner" to perform some Openstack command to release unassigned floating IPs when destroying the instance. (tried adding "reuse_ips: true" do template.json file, did not work).
+### 3) (eventually) Post-processors
 
-### 3) Post-processors
+- ATTENTION! Sometimes openstack failed to re-release the floating IP associated with an image-based instance! --> Might be necessary adding an "error-cleanup-provisioner" to perform some Openstack command to release unassigned floating IPs when destroying the instance. (tried adding "reuse_ips: true" do template.json file, did not work).
