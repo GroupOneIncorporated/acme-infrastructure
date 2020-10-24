@@ -13,14 +13,6 @@
       "security_groups": [
         "default",
         "k8s_secgroup"
-      ],
-
-      "image_visibility": "shared",
-      "image_members": [
-        "0edd1695d5864346994991b15eb88bec",
-        "3ca8e4e8fa9a4236b662310e79a9754b",
-        "51d4608b786e40d69614cb962773a4fc",
-        "a070e9c25a6e488d8ecd7366a0e6f63d"
       ]
     }
   ],
