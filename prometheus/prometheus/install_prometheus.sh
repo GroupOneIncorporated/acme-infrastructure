@@ -30,7 +30,7 @@ echo "Moving prometheus.yml to /etc/prometheus/"
 sudo cp prometheus.yml /etc/prometheus/prometheus.yml
 
 echo "Moving rules"
-sudo cp rules/ /etc/prometheus/rules/
+sudo cp -r rules/ /etc/prometheus/rules/
 
 echo "Applying permissions to prometheus.yml"
 sudo chown prometheus:prometheus /etc/prometheus/prometheus.yml
