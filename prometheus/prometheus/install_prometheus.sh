@@ -1,8 +1,9 @@
 #!/bin/bash
-# Installing Prometheus on ubuntu
+# Installing Prometheus on Debian
 
 echo "Creating user"
-sudo useradd --no-create-home --shell /bin/false prometheus
+sudo groupadd --system prometheus
+sudo useradd -s /sbin/nologin --system -g prometheus prometheus
 
 echo "Creating directory for file system"
 sudo mkdir /etc/prometheus
