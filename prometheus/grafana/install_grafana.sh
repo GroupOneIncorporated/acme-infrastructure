@@ -1,8 +1,13 @@
-echo "Adding package to repo"
+#!/bin/bash
+# Installing Grafana on Debian
+
+echo "******************************* Get Grafana *******************************"
+wget -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
 
-echo "Installing..."
-sudo apt install grafana -y
+echo "******************************* Update and install grafana *******************************"
+sudo apt-get update -y
+sudo apt-get install grafana
 
-echo "Starting grafana!"
-sudo service grafana-server start
+echo "******************************* Starting server *******************************"
+sudo /bin/systemctl start grafana-server
