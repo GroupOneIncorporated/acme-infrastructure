@@ -30,6 +30,10 @@ ingress:
 wordpress:
   nameOverride: wordpress
   fullnameOverride: wordpress
+  image:
+    registry: docker.io
+    repository: brocahontaz/acme_wordpress
+    tag: latest
   wordpressUsername: admin
   wordpressPassword: supersecretpassword123
   wordpressEmail: johan@rooter.se
@@ -65,6 +69,10 @@ wordpress:
     size: 8G
   mariadb:
     enabled: true
+    image:
+      registry: docker.io
+      repository: brocahontaz/acme_mariadb
+      tag: latest
     replication:
       enabled: false
     db:
