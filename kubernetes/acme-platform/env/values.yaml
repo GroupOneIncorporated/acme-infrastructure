@@ -19,11 +19,17 @@ ingress:
       #    secretName: acme-wordpress-cert
       #    serviceName: wordpress
       #    servicePort: 80
-      - nodetest:
-          hostName: nodetest.rooter.se
-          secretName: nodetest-cert
-          serviceName: nodetest
-          servicePort: 80
+      #- nodetest:
+      #    hostName: nodetest.rooter.se
+      #    secretName: nodetest-cert
+      #    serviceName: nodetest
+      #    servicePort: 80
+      - kube-state-metrcis:
+          hostName: metrics.acme-wordpress.rooter.se
+          secretName: kube-state-metrics-cert
+          serviceName: kube-state-metrics
+          servicePort: 8080
+
 
 # ---Internal services---
 
