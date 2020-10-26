@@ -1,6 +1,7 @@
 version: '3'
 services:
   wordpress:
+    user: root
     build:
       context: ./wordpress/
       dockerfile: Dockerfile
@@ -17,6 +18,7 @@ services:
       - WORDPRESS_DATABASE_USER=bn_wordpress
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
       - ALLOW_EMPTY_PASSWORD=yes
+      - WORDPRESS_SKIP_INSTALL=yes
   mariadb:
     build:
       context: ./mariadb/
