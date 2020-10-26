@@ -2,6 +2,12 @@
 - name: Install docker
   include: docker.yaml
 
+- name: Install node
+  include: node_exporter.yml
+  remote_user: debian
+  vars:
+    node_exporter_version: 1.0.1
+
 - name: apt upgrade
   become: yes
   apt:
