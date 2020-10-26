@@ -1,0 +1,53 @@
+---
+- hosts: all
+  remote_user: debian
+  vars:
+    node_exporter_version: 1.0.1
+  tasks:
+    - name: create groups
+      become: yes
+      group:
+        name: prometheus
+        state: present
+    - name: create users
+      become: yes
+      user:
+        name: prometheus
+        group: prometheus
+        createhome: no
+        system: yes
+        state: present
+    - name: create opt directory for prometheus/node_exporter
+      become: yes
+      file:
+        path: /opt/prometheus
+        state: directory
+    - name: download node exporter
+      become: yes
+      get_url:
+        url: https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
+        dest: /opt/prometheus
+    - name: unarchive node exporter
+      become: yes
+      unarchive:
+        remote_src: yes
+        src: /opt/prometheus/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz
+        dest: /opt/prometheus
+    - name: create symlink to node exporter
+      become: yes
+      file:
+        path: /usr/bin/node_exporter
+        state: link
+        src: /opt/prometheus/node_exporter-{{ node_exporter_version }}.linux-amd64/node_exporter
+    - name: install unit file to systemd
+      become: yes
+      template:
+        src: ../../../../node_exporter/node_exporter.service
+        dest: /etc/systemd/system/node_exporter.service
+    - name: configure systemd to use service
+      become: yes
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: started
+        name: node_exporter.service
