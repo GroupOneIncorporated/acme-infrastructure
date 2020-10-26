@@ -1,0 +1,53 @@
+ChangeLog
+=========
+Version: 1.0.6
+
+    i) About me section minor bug fixed.
+
+
+Version: 1.0.5
+
+    i) About me section minor bug fixed and other bug fixed.
+
+Version: 1.0.4
+
+    i) Added more social icons.
+    ii) Added Skins.
+    iii) Added custom logo and site title and description minor bug fixed.
+    iv) Blog Layout bug fixed.
+    v) Modify Mobile Menu.
+    vi) Showcase bug fixed.
+    v) Minimize Control Panel.
+    vi) Header Image bug fixed.
+
+
+VERSION 1.0.3
+    ii) Header Image Bug fixed.
+	i) WooCommerce 3.0 Fix 
+
+Version 1.0.2
+
+	i) Added WooCommerce Support
+
+Version 1.0.0.1
+
+	i) Fixed issue where Hiding Titles, hid social icons too.
+
+Version 1.0
+
+	i) Fixed Issues with Footer Widget Area 4 Not appearing.			
+	ii) Added nofollow to Footer Credit Link.
+
+Version 0.94
+
+	i) Minor Correction to pot file.
+	ii) Removed Config.codekit
+
+Version 0.91
+
+	i) Corrected Text Domain in customizer.php
+	ii) Escaped Values on Output
+
+Version 0.9 
+
+	- Initial Release
