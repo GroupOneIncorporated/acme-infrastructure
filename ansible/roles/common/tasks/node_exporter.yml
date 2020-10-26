@@ -4,7 +4,7 @@
   vars:
     node_exporter_version: 1.0.1
   tasks:
-    - name: create groups
+    - name: create group
       become: yes
       group:
         name: prometheus
