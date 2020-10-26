@@ -1,5 +1,9 @@
 k8s-master-1
 k8s-node-1
+k8s-node-2
+k8s-node-3
+k8s-node-4
+k8s-node-5
 
 [all:vars]
 docker_version="5:19.03.*"

@@ -1,0 +1,31 @@
+@import '../variables';
+@import '../functions';
+
+@accent: #e35d5b;
+
+@import '../_init';
+
+@import "../woocommerce";
+
+//logo
+#site-logo {
+  display: inline-block;
+  float: none;
+  text-align: center;
+  margin-bottom: 22px;
+  max-width: 100px;
+  max-height: 100px;
+  @media screen and (max-width: 767px) {
+    float: none;
+    max-width: 60px;
+    max-height: 60px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    float: none;
+    max-width: 60px;
+    max-height: 60px;
+    display: inline-block;
+  }
+}

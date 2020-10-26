@@ -1,0 +1,134 @@
+/* top slider */
+.slider-wrapper {
+  margin-top: 60px;
+  margin-bottom: -40px;
+
+  .nivoSlider {
+    box-shadow: none;
+    background: none;
+    border-bottom: solid 4px @accent;
+    border-top: solid 4px @accent;
+  }
+  .nivo-controlNav {
+    position: relative;
+    bottom: 15px;
+    margin-bottom: -20px;
+    z-index: 9;
+    a {
+      background-image: none;
+      width: 22px;
+      height: 6px;
+      margin: 0 5px;
+      background: black;
+      &:hover {
+        background: fade(@accent, 50%);
+      }
+    }
+    .active {
+      background: @accent;
+    }
+  }
+  .nivo-caption {
+    font-family: inherit;
+    text-align: left;
+    .transition(0.4s all ease;);
+    opacity: 1;
+    bottom: 65px;
+    background: none;
+    border-left: solid 3px @accent;
+    padding: 0;
+    left: 60px;
+    @media screen and (max-width: 767px) {
+      .transform(scale(0.6));
+      left: -50px;
+      bottom: 0;
+    }
+    &:hover {
+    }
+    @media screen {
+      @media (max-width: 660px) {
+        &:hover {
+
+        }
+      }
+    }
+    a { text-decoration:  none;
+      border-bottom: none;
+    }
+    .slide-title {
+      display: inline-block;
+      font-size: 32px;
+      font-weight: normal;
+      text-shadow: 0px 1px 0px #777;
+      .transition(0.4s all ease);
+      background: fade(black,80%);
+      color: @accent;
+      padding: 6px 15px;
+    }
+    .slide-desc span {
+      /* border-left: solid 4px black; */
+      display: inline-block;
+      font-size: 18px;
+      font-weight: lighter;
+      padding: 4px;
+      color: white;
+      background: fade(black,50%);
+      text-shadow: 0px 1px 0px #000;
+      padding: 3px 15px;
+      padding-bottom: 8px;
+    }
+  }
+}
+
+/* sb slider */
+.latest-hap {
+  position: relative;
+}
+.sb-slider {
+  .sb-description {
+    pointer-events: none;
+    z-index: 88;
+    background: fade(black, 40%);
+    border-left-color: @accent;
+    padding: 10px;
+    h3 {
+      margin: 0;
+    }
+
+  }
+}
+.nav-arrows {
+  position: absolute;
+  top: 50%;
+  a {
+    background-color: fade(black,50%);
+    .transition(0.2s all ease);
+    box-shadow: 0px 0px 1px @accent;
+    &:hover {
+      background-color: fade(@accent,50%);;
+    }
+  }
+  a:first-child {
+    right: -535px;
+    @media screen {
+      @media (max-width: 1199px) {
+        right: -435px;
+      }
+      @media (max-width: 991px) {
+        right: -675px;
+      }
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
+  a:nth-child(2) {
+    right: -47px;
+    @media screen and (min-width: 768px) and (max-width: 991px) {
+      right: -57px;
+    }
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+}

@@ -1,28 +1,51 @@
+ssh_key_path: ~/.ssh/GroupOneInc.pem
 nodes:
-  - address: 194.47.176.231
-    internal_address: 192.168.199.9
+  - address: 194.47.177.126
+    internal_address: 192.168.199.14
     role:
       - controlplane
       - etcd
+    hostname_override: k8s-master-1
+    user: debian
     labels:
       node-role.kubernetes.io/master: true
     taints:
       - key: node-role.kubernetes.io/master
         value: true
         effect: NoSchedule
-    hostname_override: k8s-master-1
-    user: debian
-  - address: 194.47.176.238
-    internal_address: 192.168.199.11
+  - address: 192.168.199.13
+    internal_address: 192.168.199.13
     role:
       - worker
-    labels: ''
-    taints: []
     hostname_override: k8s-node-1
+    user: debian
+  - address: 192.168.199.8
+    internal_address: 192.168.199.8
+    role:
+      - worker
+    hostname_override: k8s-node-2
+    user: debian
+  - address: 192.168.199.9
+    internal_address: 192.168.199.9
+    role:
+      - worker
+    hostname_override: k8s-node-3
+    user: debian
+  - address: 192.168.199.5
+    internal_address: 192.168.199.5
+    role:
+      - worker
+    hostname_override: k8s-node-4
+    user: debian
+  - address: 192.168.199.6
+    internal_address: 192.168.199.6
+    role:
+      - worker
+    hostname_override: k8s-node-5
     user: debian
 services:
   etcd:
-    snapshot: 'true'
+    snapshot: true
     creation: 6h
     retention: 24h
   kubelet:
@@ -36,3 +59,7 @@ authorization:
   mode: rbac
 ingress:
   provider: none
+bastion_host:
+  address: 194.47.177.126
+  user: debian
+  port: 22

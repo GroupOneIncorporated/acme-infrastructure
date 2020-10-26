@@ -1,0 +1,12 @@
+[Global]
+auth-url=https://cscloud.lnu.se:5000/v3
+username=<username>
+password=<password>
+region=RegionOne
+tenant-name=<projectname/id>
+domain-name=Default
+
+[LoadBalancer]
+use-octavia=false
+lb-provider=haproxy
+manage-security-groups=true

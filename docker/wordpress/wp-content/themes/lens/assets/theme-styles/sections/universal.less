@@ -1,0 +1,140 @@
+.body-font {
+  font-family: "Open Sans", sans-serif;
+}
+.title-font {
+  font-family: "Roboto Slab", sans-serif;
+}
+
+body {
+  .body-font;
+  background: @background;
+  word-wrap: break-word;
+}
+.mega-container {
+  background: white;
+  max-width: 1170px;
+  margin: auto;
+  margin-top: 20px;
+  overflow: auto;
+}
+.container {
+  max-width: 1170px;
+}
+a {
+  color: @accent;
+  cursor: pointer;
+  &:hover {
+    text-decoration: none;
+    color: @accent;
+  }
+}
+
+.container {
+  margin: auto;
+}
+
+/* section titles */
+.section-title {
+  font-weight: normal;
+  color: #777;
+  font-size: 23px;
+  .title-font;
+  text-align: center;
+  position: relative;
+  margin-bottom: 30px;
+  @media screen and (max-width: 991px) {
+    margin-top: 20px;
+  }
+  &:after {
+    content: "";
+    height: 3px;
+    background: @accent;
+    position: absolute;
+    left: 47%;
+    right: 47%;
+    bottom: -7px;
+  }
+
+}
+
+#content {
+  margin-top: 30px;
+}
+
+.grid-row {
+  margin: 0;
+}
+#infinite-handle {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  clear: both;
+  span { background: fade(black, 0%); }
+  span button, span button:hover {
+    background: #eee;
+    box-shadow: none;
+    font-size: 15px;
+    font-weight: normal;
+    color: @accent;
+    text-shadow: none;
+    border-radius: 0px;
+    border-bottom: solid 3px @accent;
+    padding: 5px 10px;
+  }
+}
+/* Single Posts Area */
+.freak-single-entry-header {
+  color: #eee;
+  position: relative;
+  overflow: hidden;
+  margin-top: -45px;
+  margin-bottom: 40px;
+  z-index: 99;
+  background: #444;
+  .entry-header-bg {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-attachment: fixed;
+    background-position-y: center;
+    background-size: cover;
+    filter: blur(10px) brightness(0.7);
+    -webkit-filter: blur(10px) brightness(0.7);
+    .transform(scale(1.1));
+  }
+  .layer {
+
+    padding: 50px 15px 100px 15px;
+    background: rgba(0,0,0,0.1);
+    width: 100%;
+    height: 100%;
+  }
+  h1 {
+    margin: 0;
+    font-size: 48px;
+    font-weight: lighter;
+    text-shadow: 1px 1px 1px black;
+  }
+  .entry-meta {
+    font-size: small;
+    font-weight: lighter;
+    a {
+      color: white;
+      font-style: italic;
+
+    }
+  }
+}
+.mega-container.content {
+  position: relative;
+  top: -100px;
+  z-index: 999;
+  .content {
+    padding-top: 35px;
+    border-top: solid 3px @accent;
+  }
+}
+

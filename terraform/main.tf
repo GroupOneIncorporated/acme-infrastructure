@@ -93,7 +93,7 @@ resource "openstack_compute_instance_v2" "k8s_master" {
   name        = "k8s-master-${count.index + 1}"
   count       = var.num_k8s_masters
   image_name  = "Debian 9"
-  flavor_name = "c2-r2-d20"
+  flavor_name = "c2-r4-d20"
   key_pair    = openstack_compute_keypair_v2.k8s.name
 
   availability_zone_hints = "Education"
@@ -130,7 +130,7 @@ resource "openstack_compute_instance_v2" "k8s_node" {
   name        = "k8s-node-${count.index + 1}"
   count       = var.num_k8s_nodes
   image_name  = "Debian 9"
-  flavor_name = "c2-r4-d20"
+  flavor_name = "c2-r8-d20"
   key_pair    = openstack_compute_keypair_v2.k8s.name
 
   availability_zone_hints = "Education"
@@ -142,20 +142,4 @@ resource "openstack_compute_instance_v2" "k8s_node" {
   security_groups = ["default","k8s_secgroup"]
 
   depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
-}
-
-// Floating IP
-resource "openstack_networking_floatingip_v2" "k8s_node" {
-  count = var.num_k8s_nodes
-  pool  = "public"
-}
-
-// Floating IP associate
-resource "openstack_compute_floatingip_associate_v2" "k8s_node" {
-  count       = var.num_k8s_nodes
-  instance_id = element(openstack_compute_instance_v2.k8s_node.*.id, count.index)
-  floating_ip = element(
-    openstack_networking_floatingip_v2.k8s_node.*.address,
-    count.index,
-  )
 }

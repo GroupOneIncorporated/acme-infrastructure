@@ -1,0 +1,36 @@
+#masthead{
+  .social-icons {
+    text-align: center;
+    @media screen and (max-width: 991px) { text-align: center; }
+    padding-top: 4px;
+    padding-bottom: 15px;
+    padding-left: 0;
+  }
+  .social-icons a {
+    background: none;
+    color: lighten(@header-color,10%);
+    margin-left: 8px;
+    img {
+      max-width: 40px;
+      @media screen and (max-width: 767px){
+        max-width: 30px;
+      }
+      .transition(0.2s all ease);
+      &:hover {
+        .transform(scale(1.2));
+      }
+    }
+    &:before {
+      background: fade(@background,50%);
+    }
+    i {
+      display: inline-block;
+      text-align: center;
+      min-width: 35px;
+      padding: 8px;
+      outline: solid 1px fade(@header-color,50%);
+      border: solid 1px lighten(@header-color,10%);
+      font-size: 19px;
+    }
+  }
+}
