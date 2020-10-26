@@ -1,14 +1,9 @@
-
 [Unit]
-Description=Node Exporter
-Wants=network-online.target
-After=network-online.target
-
+Description=Service which runs Node Exporter for Prometheus scraping
+ 
 [Service]
 User=node_exporter
-Group=node_exporter
-Type=simple
-ExecStart=/usr/local/bin/node_exporter
-
+ExecStart=/usr/bin/node_exporter
+ 
 [Install]
 WantedBy=multi-user.target
