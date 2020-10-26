@@ -40,6 +40,7 @@ wordpress:
   wordpressFirstName: Johan
   wordpressLastName: Andersson
   wordpressBlogName: ACME
+  wordpressSkipInstall: true
   replicaCount: 1
   #allowOverrideNone: yes
   #htaccessPersistenceEnabled: yes
