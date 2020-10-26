@@ -24,11 +24,6 @@ ingress:
       #    secretName: nodetest-cert
       #    serviceName: nodetest
       #    servicePort: 80
-      - kube-state-metrcis:
-          hostName: metrics.acme-wordpress.rooter.se
-          secretName: kube-state-metrics-cert
-          serviceName: kube-state-metrics
-          servicePort: 8080
 
 
 # ---Internal services---
@@ -47,7 +42,7 @@ wordpress:
   wordpressLastName: Andersson
   wordpressBlogName: ACME
   wordpressSkipInstall: true
-  replicaCount: 1
+  replicaCount: 5
   #allowOverrideNone: yes
   #htaccessPersistenceEnabled: yes
   service:
@@ -81,7 +76,7 @@ wordpress:
       repository: brocahontaz/acme_mariadb
       tag: latest
     replication:
-      enabled: false
+      enabled: true
     db:
       #name: acme
       #user: admin
@@ -105,5 +100,5 @@ nginx-ingress-controller:
   replicaCount: 1
   service: 
     type: LoadBalancer
-    loadBalancerIP: 31.12.86.208
+    loadBalancerIP: 194.47.177.61
     externalTrafficPolicy: Cluster
