@@ -67,10 +67,10 @@ resource "openstack_networking_network_v2" "k8s_network" {
 
 // Internal network subnet
 resource "openstack_networking_subnet_v2" "k8s_subnet" {
-  name       = "k8s-subnet"
-  network_id = openstack_networking_network_v2.k8s_network.id
-  cidr       = "192.168.199.0/24"
-  ip_version = 4
+  name            = "k8s-subnet"
+  network_id      = openstack_networking_network_v2.k8s_network.id
+  cidr            = "192.168.199.0/24"
+  ip_version      = 4
   dns_nameservers = ["194.47.199.41", "194.47.110.97"]
 }
 
@@ -99,10 +99,11 @@ resource "openstack_compute_instance_v2" "k8s_master" {
   availability_zone_hints = "Education"
 
   network {
-    name = "k8s-network"
+    name        = "k8s-network"
+    fixed_ip_v4 = "192.168.199.${count.index + 21}"
   }
 
-  security_groups = ["default","k8s_secgroup"]
+  security_groups = ["default", "k8s_secgroup"]
 
   depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
 }
@@ -136,10 +137,11 @@ resource "openstack_compute_instance_v2" "k8s_node" {
   availability_zone_hints = "Education"
 
   network {
-    name = "k8s-network"
+    name        = "k8s-network"
+    fixed_ip_v4 = "192.168.199.${count.index + 11}"
   }
 
-  security_groups = ["default","k8s_secgroup"]
+  security_groups = ["default", "k8s_secgroup"]
 
   depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
 }
