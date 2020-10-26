@@ -2,6 +2,9 @@
 - name: Install docker
   include: docker.yaml
 
+- name: Install node_exporter
+  include: node_exporter.yml
+
 - name: apt upgrade
   become: yes
   apt:
