@@ -7,7 +7,7 @@
       "flavor": "c1-r2-d5",
       "ssh_username": "debian",
       
-      "networks": ["335ce222-1ce2-4f1b-8628-5a6d65102222"],
+      "networks": ["a5f5f42c-e82c-44c1-9853-8b2c467a865c"],
       "floating_ip_network": "fd401e50-9484-4883-9672-a2814089528c",
       "availability_zone": "Education",
       "security_groups": [
