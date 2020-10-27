@@ -43,4 +43,4 @@ sudo cp prometheus.service /etc/systemd/system/prometheus.service
 echo "******************************* reloading and starting systemctl *******************************"
 sudo systemctl daemon-reload
 sudo systemctl enable prometheus
-sudo systemctl start prometheus
+#sudo systemctl start prometheus

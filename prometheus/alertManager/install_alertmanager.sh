@@ -37,4 +37,4 @@ sudo cp alertmanager.service /etc/systemd/system/alertmanager.service
 echo "******************************* Starting server *******************************"
 sudo systemctl daemon-reload
 sudo systemctl enable alertmanager
-sudo systemctl start alertmanager
+#sudo systemctl start alertmanager
