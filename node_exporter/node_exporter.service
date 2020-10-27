@@ -2,7 +2,7 @@
 Description=Service which runs Node Exporter for Prometheus scraping
  
 [Service]
-User=node_exporter
+User=prometheus
 ExecStart=/usr/bin/node_exporter
  
 [Install]
