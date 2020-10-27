@@ -10,7 +10,7 @@ resources: {}
 # Set production flag to true to use real certificates from letsencrypt.
 # Otherwise letsencrypt staging server will be used.
 ingress:
-  enabled: true
+  enabled: false
   production: false
   spec:
     hosts:
@@ -66,8 +66,8 @@ wordpress:
         secretName: acme-wordpress.rooter.se-tls
   persistence:
     enabled: true
-    storageClass: wp-gold
-    accesMode: ReadWriteOnce
+    storageClass: nfs
+    accesMode: ReadWriteMany
     size: 8G
   mariadb:
     enabled: true
@@ -86,7 +86,13 @@ wordpress:
     master:
       persistence: 
         enabled: true
-        storageClass: sql-gold
+        storageClass: nfs
+        accessModes: [ReadWriteOnce]
+        size: 8G
+    slave:
+      persistence: 
+        enabled: true
+        storageClass: nfs
         accessModes: [ReadWriteOnce]
         size: 8G
     volumePermissions:
@@ -96,9 +102,9 @@ wordpress:
 
 # ---External services---
 
-nginx-ingress-controller:
-  replicaCount: 1
-  service: 
-    type: LoadBalancer
-    loadBalancerIP: 194.47.177.61
-    externalTrafficPolicy: Cluster
+#nginx-ingress-controller:
+#  replicaCount: 1
+#  service: 
+#    type: LoadBalancer
+#    loadBalancerIP: 194.47.177.61
+#    externalTrafficPolicy: Cluster

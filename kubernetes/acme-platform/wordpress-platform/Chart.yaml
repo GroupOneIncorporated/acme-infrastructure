@@ -26,6 +26,6 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
   #- name: mariadb
     #version: 
-  - name: nginx-ingress-controller
-    version: 5.5.1
-    repository: https://charts.bitnami.com/bitnami
+  #- name: nginx-ingress-controller
+  #  version: 5.5.1
+  #  repository: https://charts.bitnami.com/bitnami

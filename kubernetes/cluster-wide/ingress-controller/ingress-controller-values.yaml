@@ -1,5 +1,5 @@
 replicaCount: 1
 service:
   type: LoadBalancer
-  loadBalancerIP: 31.12.86.208
+  loadBalancerIP: 194.47.177.61
   externalTrafficPolicy: Cluster
