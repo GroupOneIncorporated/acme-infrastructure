@@ -19,24 +19,30 @@ ingress:
       #    secretName: acme-wordpress-cert
       #    serviceName: wordpress
       #    servicePort: 80
-      - nodetest:
-          hostName: nodetest.rooter.se
-          secretName: nodetest-cert
-          serviceName: nodetest
-          servicePort: 80
+      #- nodetest:
+      #    hostName: nodetest.rooter.se
+      #    secretName: nodetest-cert
+      #    serviceName: nodetest
+      #    servicePort: 80
+
 
 # ---Internal services---
 
 wordpress:
   nameOverride: wordpress
   fullnameOverride: wordpress
+  image:
+    registry: docker.io
+    repository: brocahontaz/acme_wordpress
+    tag: latest
   wordpressUsername: admin
   wordpressPassword: supersecretpassword123
   wordpressEmail: johan@rooter.se
   wordpressFirstName: Johan
   wordpressLastName: Andersson
   wordpressBlogName: ACME
-  replicaCount: 1
+  wordpressSkipInstall: true
+  replicaCount: 5
   #allowOverrideNone: yes
   #htaccessPersistenceEnabled: yes
   service:
@@ -65,8 +71,12 @@ wordpress:
     size: 8G
   mariadb:
     enabled: true
+    image:
+      registry: docker.io
+      repository: brocahontaz/acme_mariadb
+      tag: latest
     replication:
-      enabled: false
+      enabled: true
     db:
       #name: acme
       #user: admin
@@ -90,5 +100,5 @@ nginx-ingress-controller:
   replicaCount: 1
   service: 
     type: LoadBalancer
-    loadBalancerIP: 31.12.86.208
+    loadBalancerIP: 194.47.177.61
     externalTrafficPolicy: Cluster

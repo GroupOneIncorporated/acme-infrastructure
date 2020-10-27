@@ -1,0 +1,243 @@
+/* keep the ATP background white */
+html#iframely {
+    background: white !important;
+}
+
+#iframely, #iframely body {
+	background: white !important;
+	padding: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+#iframely {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0.0;
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: absolute;
+	visibility: hidden;
+}
+
+#iframely #wpbody-content {
+	float: none;
+	padding: 0px;
+}
+
+#iframely #ngg_page_content.ngg_settings_page {
+    background: #fff;
+}
+
+#iframely h2,
+#iframely #icon-nextgen-gallery {
+    display: none;
+}
+
+#iframely #wpwrap {
+    background-color: #fcfcfc;
+}
+
+#iframely #ngg_page_content {
+    margin: 0;
+    width: 100%;
+}
+
+#iframely .ngg-admin .notice, 
+#iframely .ngg-admin div.error, 
+#iframely .ngg-admin div.updated {
+    display: none;
+}
+
+#iframely #ngg_page_content .ngg_page_content_header {
+    display:none;
+}
+
+#iframely #ngg_page_content .ngg_page_content_menu {
+    background: transparent;
+    border: none;
+    padding: 10px 20px 10px 0;
+    float: none;
+    height: 25px;
+    margin-top: 0;
+    width: auto;
+    border-bottom: 1px solid #ddd;
+    background: #fafafa;
+}
+
+#iframely #ngg_page_content .ngg_page_content_menu a {
+    border: none;
+    color: #888;
+    display: inline;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    line-height: 25px;
+    padding: 15px 20px;
+    font-size: 12px;
+}
+
+#iframely #ngg_page_content .ngg_page_content_menu a:active {
+    background: transparent;
+}
+
+#iframely #ngg_page_content .ngg_page_content_menu .ngg_page_content_menu_active {
+    background: transparent;
+    font-weight: bold;
+    color: #123248;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 2px solid #fff;
+    background: #fff;
+}
+
+/*#iframely #ngg_page_content .ngg_page_content_menu .ngg_page_content_menu_active:after {
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 6px solid #cad1d6;
+    border-top: 6px solid #123248;
+    content: " ";
+    position: absolute;
+    left: 45%;
+    display: inline;
+    top: 42px;
+}*/
+
+#iframely #ngg_page_content .ngg_page_content_menu a:before {
+	display: none;
+}
+
+#displayed_tab #ngg_page_content .ngg_page_content_menu .ngg_page_content_menu_active:after,
+#displayed_tab #ngg_page_content .ngg_page_content_menu a:active:after {
+    display: none;
+}
+
+#iframely #ngg_page_content .ngg_page_content_main {
+    padding: 30px;
+    width: 100%;
+    box-shadow: none;
+}
+
+#iframely #ngg_page_content .ngg_page_content_main h3 {
+    display: none;
+}
+
+#iframely #ngg_page_content .ngg_manage_tags .ngg_page_content_main h3,
+#iframely #ngg_page_content .ngg_manage_images .ngg_page_content_main h3,
+#iframely #ngg_page_content .ngg_manage_albums .ngg_page_content_main h3 {
+    display: block;
+}
+
+#iframely #ngg_page_content button:active,
+#iframely #ngg_page_content .button-primary:active,
+#iframely #ngg_page_content .button-secondary:active {
+    vertical-align: top;
+}
+
+
+#iframely #ngg_page_content .ngg_manage_galleries .search-form {
+    margin-top: -20px;
+}
+
+#iframely #ngg_page_content .ngg_manage_galleries p.search-box {
+    margin: 0;
+    position: relative;
+    float: none;
+    top: 37px;
+    left: 460px;
+    width: 350px;
+}
+
+#iframely .search-box input[name="s"], 
+#iframely #bulkaction {
+    width: 140px !important;
+}
+
+#iframely .tablenav.top .displaying-num {
+    display: none;
+}
+
+#iframely .ngg_manage_galleries table #id {
+    min-width: 40px;
+}
+
+#iframely .ngg_manage_galleries table #author {
+    min-width: 85px;
+}
+
+#iframely .ngg_manage_galleries table #page_id {
+    min-width: 65px;
+}
+#iframely .gallery_page_nggallery-manage-gallery .ui-dialog {
+    height: auto !important;
+    min-height: auto;
+}
+
+/* Media Queries */
+
+
+@media (max-width: 1140px) {
+    #iframely .plupload_buttons {
+        display: inline;
+        margin: 0 0 0 10px;
+    }
+    #iframely .gallery_page_ngg_addgallery #ngg_page_content button,
+    #iframely .gallery_page_ngg_addgallery #ngg_page_content .button-primary,
+    #iframely .gallery_page_ngg_addgallery #ngg_page_content .button-secondary {
+        width: 130px !important;
+    }
+}
+
+@media (max-width: 940px) {
+    #iframely .plupload_buttons {
+        display: block;
+        margin: 10px 0 0 75px;
+    }
+    #iframely .gallery_page_ngg_addgallery #ngg_page_content button,
+    #iframely .gallery_page_ngg_addgallery #ngg_page_content .button-primary,
+    #iframely .gallery_page_ngg_addgallery #ngg_page_content .button-secondary {
+        width: 201px !important;
+    }
+}
+
+@media (max-width: 800px) {
+    #iframely .ngg-admin #wpbody {
+        padding: 0;
+    } 
+    #iframely #ngg_page_content .ngg_page_content_menu {
+        padding: 5px 0 0;
+        background: transparent;
+        border: none;
+    }
+    #iframely #ngg_page_content .ngg_page_content_menu a {
+        display: block;
+        width: 100%;
+        float: left;
+        padding: 0;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    #iframely #ngg_page_content .ngg_page_content_menu .ngg_page_content_menu_active, 
+    #iframely #ngg_page_content .ngg_page_content_menu a:active {
+        background: transparent;
+    }
+    #iframely #ngg_page_content .ngg_page_content_menu .ngg_page_content_menu_active:after {
+        display:none;
+    }
+    #iframely #ngg_page_content .ngg_page_content_menu a:last-of-type {
+        padding-bottom: 5px;
+    }
+    #iframely .plupload_buttons {
+        margin-left: 0;
+    }
+    #iframely #ngg_page_content .plupload_droptext {
+        line-height: 60px;
+    }
+    #iframely .gallery_page_ngg_addgallery #ngg_page_content button,
+    #iframely .gallery_page_ngg_addgallery #ngg_page_content .button-primary,
+    #iframely .gallery_page_ngg_addgallery #ngg_page_content .button-secondary {
+        width: 100% !important;
+        margin: 4px 0;
+        display: block;
+    }
+}

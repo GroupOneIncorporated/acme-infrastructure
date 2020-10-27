@@ -2,7 +2,7 @@
 - name: Install docker
   include: docker.yaml
 
-- name: Install node
+- name: Install node_exporter
   include: node_exporter.yml
   remote_user: debian
   vars:
