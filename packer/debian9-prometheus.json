@@ -18,10 +18,16 @@
   ],
   "provisioners": [
     {
-      "type": "shell",
+      "type": "file",
+      "source": "../prometheus/",
+      "destination": "/tmp/"
+    },
+    {
+      "type": "shell-local",
       "scripts": [
-        "../prometheus/install_prometheus.sh",
-        "../prometheus/install_grafana.sh"
+        "/tmp/prometheus/prometheus/install_prometheus.sh",
+        "/tmp/prometheus/grafana/install_grafana.sh",
+        "/tmp/prometheus/alertManager/install_alertmanager.sh"
       ]
     }
   ]
