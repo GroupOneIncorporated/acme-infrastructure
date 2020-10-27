@@ -1,6 +1,10 @@
 # Terraform
 Provisioning of cloud resources.
 
+## Prerequisites
+- Terraform
+- Openstack Credentials (e.g. openstack.rc)
+
 ## How to install Terraform
 - Download
 - Add it to your path
@@ -15,6 +19,7 @@ Terraform will show a plan of additions, changes and deletions, that can then be
 ### Provisioning
 ```
 source openstack.rc
+terraform init
 terraform apply
 ```
 
