@@ -28,18 +28,18 @@ wordpress:
   ingress: 
     enabled: true
     certManager: false
-    hostname: "acme-wordpress.rooter.se"
+    hostname: "acme-jose.rooter.se"
     annotations: 
       kubernetes.io/ingress.class: "nginx"
       cert-manager.io/cluster-issuer: "letsencrypt-staging"
     tls: false
     extraHosts:
-      - name: "acme-wordpress.rooter.se"
+      - name: "acme-jose.rooter.se"
         path: /
     extraTls:
       - hosts:
-          - acme-wordpress.rooter.se
-        secretName: acme-wordpress.rooter.se-tls
+          - acme-jose.rooter.se
+        secretName: acme-jose.rooter.se-tls
   persistence:
     enabled: true
     storageClass: nfs

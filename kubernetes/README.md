@@ -14,28 +14,49 @@ To decrypt it in a tmp file and create a k8s secret, simply run the script.
 
 ## Cluster wide
 
-### Openstack Cloud Controller Manager (Important!)
+### Openstack Cloud Controller Manager (!Important!)
 Necessary to get dynamic provisioning of volumes & loadbalancers working.
 
 In cluster-wide folder: 
 
 `kubectl apply -f openstack-cloud-controller-manager`
 
-### CSI-Cinder plugin (Important!)
+### CSI-Cinder plugin (!Important!)
 Necessary for Openstack volumes.
 
 In cluster-wide folder: 
 
 `kubectl apply -f csi-cinder-plugin`
 
-### Storage Classes
-Necessary for persistent data (Mongo, Rabbit).
+### NFS provisioner (!Important!)
+Enables ReadWriteMany type for persistence.
+
+```
+helm repo add stable https://charts.helm.sh/stable
+helm install nfs-provisioner -f nfs-values.yaml stable/nfs-server-provisioner
+```
+
+### Storage Classes (!Important!)
+Necessary for persistent data (Wordpress, MariaDB).
 
 In cluster-wide folder: 
 
 `kubectl apply -f storage-classes`
 
-### Cluster Issuers
+### Nginx Ingress Controller (!Important!)
+Necessary to manage ingress resources. Connects to external loadbalancer.
+
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install ingress-controller -f <values-file> bitnami/nginx-ingress-controller 
+```
+
+Where `<values-file>` is the proper values file.
+
+Example:
+`helm install ingress-controller -f ingress-controller-values.yaml bitnami/nginx-ingress-controller`
+
+### Cluster Issuers (!Important!)
 
 #### Install Cert-Manager
 Necessary for automatic issuing of certificates.
@@ -51,19 +72,20 @@ See: https://cert-manager.io/docs/installation/kubernetes/#verifying-the-install
 ##### 4 clean up the test resources
 `kubectl delete -f test-resources.yaml` 
 
-`kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v0.13.1/cert-manager.yaml`
-
 #### Install ClusterIssuers
 Necessary for automatic issuing of certificates.
 
 ##### Staging issuer (for testing)
-In cluster-issuers folder: 
+In cert-manager folder: 
 
 `kubectl apply -f letsencrypt-staging`
 ##### Production issuer (for production)
 In cluster-issuers folder: 
 
 `kubectl apply -f letsencrypt-prod`
+
+#### Delete Cert-Manager
+`kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v0.13.1/cert-manager.yaml`
 
 ## Dashboard
 Nice tool for a GUI overview of the cluster.
@@ -91,7 +113,7 @@ Use token fetched in previous step to login.
 `kubectl apply -f <name>-namespace.yaml` in namespaces-folder.
 
 ## Helm
-While in the helm-folder.
+While in the acme-platform-folder.
 
 ### Installation of chart
 `helm install -f <path-to-env-values> <name> ./<umbrella-chart-name> -n <namespace-name>` 
@@ -99,6 +121,9 @@ While in the helm-folder.
 - Where `<name>` is the desired deployment name.
 - Where `<umbrella-chart-name>` is the name of the umbrella chart to deploy.
 - Where `<namespace-name>` is the name of the namespace to deploy in.
+
+Example: 
+`helm install -f env/values.yaml acmeplatform ./wordpress-platform -n acme`
 
 ### Update chart installation
 `helm upgrade -f <path-to-env-values> <name> ./<umbrella-chart-name> -n <namespace-name>`

@@ -21,5 +21,3 @@ ingress:
 wordpress: {}
 
 # ---External services---
-
-#nginx-ingress-controller: {}
