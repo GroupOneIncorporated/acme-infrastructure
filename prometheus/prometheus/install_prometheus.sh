@@ -1,6 +1,8 @@
 #!/bin/bash
 # Installing Prometheus on Debian
 
+sudo apt-get update
+
 echo "******************************* Creating user *******************************"
 sudo groupadd --system prometheus
 sudo useradd -s /sbin/nologin --system -g prometheus prometheus

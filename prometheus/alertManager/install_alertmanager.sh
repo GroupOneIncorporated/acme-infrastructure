@@ -1,6 +1,8 @@
 #!/bin/bash
 # Installing Alertmanager on Debian
 
+sudo apt-get update
+
 echo "******************************* Creating user *******************************"
 sudo groupadd --system alertmanager
 sudo useradd -s /sbin/nologin --system -g alertmanager alertmanager
