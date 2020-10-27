@@ -1,3 +1,4 @@
 *.exe
 data
 console*
+alertmanager.yml
