@@ -30,5 +30,5 @@ sudo cp sample.yml /etc/grafana/provisioning/dashboards/sample.yml
 echo "******************************* Import dashboards *******************************"
 sudo cp -r dashboards/ /var/lib/grafana/dashboards
 
-echo "******************************* Restarting server *******************************"
-sudo /bin/systemctl restart grafana-server
+#echo "******************************* Restarting server *******************************"
+#sudo /bin/systemctl restart grafana-server

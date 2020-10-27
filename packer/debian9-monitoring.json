@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "openstack",
-      "image_name": "GroupOneInc-Debian9-Docker",
+      "image_name": "GroupOneInc-Debian9-Monitoring",
       "source_image_name": "Debian 9",
       "flavor": "c1-r2-d5",
       "ssh_username": "debian",
@@ -18,16 +18,24 @@
   ],
   "provisioners": [
     {
-      "type": "ansible",
-      "user": "debian",
-      "playbook_file": "../ansible/site.yaml"
+      "type": "file",
+      "source": "../prometheus/",
+      "destination": "/tmp/"
     },
     {
       "type": "shell",
       "inline": [
-        "sudo apt install nfs-common -y",
-        "sudo systemctl start rpcbind",
-        "sudo systemctl enable rpcbind"
+        "cd /tmp/prometheus",
+        "sudo chmod +x ./install_prometheus.sh",
+        "./install_prometheus.sh",
+        
+        "cd /tmp/grafana",
+        "sudo chmod +x ./install_grafana.sh",
+        "./install_grafana.sh",
+        
+        "cd /tmp/alertManager",
+        "sudo chmod +x ./install_alertmanager.sh",
+        "./install_alertmanager.sh"
       ]
     }
   ]
