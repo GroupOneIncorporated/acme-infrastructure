@@ -20,3 +20,7 @@ Files:
 ansible-playbook -i hosts site.yaml
 ```
 when standing in the ansible folder.
+
+## Troubleshoot
+`~/.ssh/known_hosts` might be polluted with old host keys.
+- use `export ANSIBLE_HOST_KEY_CHECKING=false`
