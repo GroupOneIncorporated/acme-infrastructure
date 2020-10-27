@@ -15,3 +15,4 @@ sudo apt-get install grafana -y
 
 echo "******************************* Starting server *******************************"
 sudo /bin/systemctl start grafana-server
+sudo /bin/systemctl enable grafana-server
