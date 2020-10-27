@@ -2,15 +2,14 @@
 Some instructions for getting the cluster running with all necessities. 
 "Root-folder" for following instructions is kubernetes.
 
-## Cloud config
+## Cloud conf
 Create secret containing cloud credentials.  
 To enable communication between the cloud controller manager and Openstack.
 
-Credentials file is encrypted using ansible-vault, and should stay that way.  
-To decrypt it in a tmp file and create a k8s secret, simply run the script.
-
-### Run script
-`./createsecret.sh`          
+### Use
+- Follow the template to create a cloud.conf 
+- Encrypt cloud.conf file with ansible-vault: `ansible-vault encrypt cloud.conf` >> use a secure password, preferably stored in a password manager. You need this password in the next step!
+- Run `./createsecret.sh` >> in this step you enter the password used to encrypt the file when prompted.       
 
 ## Cluster wide
 
