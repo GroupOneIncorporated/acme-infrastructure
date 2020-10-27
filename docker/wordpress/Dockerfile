@@ -1,3 +1,3 @@
 FROM bitnami/wordpress:latest
 
-ADD wp-content /bitnami/wordpress/wp-content
+COPY --chown=1001:1001 wp-content /bitnami/wordpress/wp-content

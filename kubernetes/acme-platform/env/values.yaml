@@ -35,6 +35,7 @@ wordpress:
     registry: docker.io
     repository: brocahontaz/acme_wordpress
     tag: latest
+    pullPolicy: Always
   wordpressUsername: admin
   wordpressPassword: supersecretpassword123
   wordpressEmail: johan@rooter.se
@@ -42,9 +43,14 @@ wordpress:
   wordpressLastName: Andersson
   wordpressBlogName: ACME
   wordpressSkipInstall: true
+  #wordpressScheme: https
   replicaCount: 5
   #allowOverrideNone: yes
-  #htaccessPersistenceEnabled: yes
+  htaccessPersistenceEnabled: yes
+  #securityContext:
+  #  enabled: true
+  #  runAsUser: 0
+  #  fsGroup: 0
   service:
     type: ClusterIP
     externalTrafficPolicy: Cluster
