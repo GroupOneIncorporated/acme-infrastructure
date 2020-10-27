@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: kube-state-metrics-ingress
+  labels:
+    role: monitoring
+  annotations:
+    kubernetes.io/ingress.class: "nginx"  
+spec:
+  rules:
+    - host: metrics.acme-gabriel.rooter.se
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: kube-state-metrics
+              servicePort: 8080

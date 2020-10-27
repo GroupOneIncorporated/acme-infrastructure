@@ -43,6 +43,11 @@ In cluster-wide folder:
 
 `kubectl apply -f storage-classes`
 
+### Kube-state-metrics (!Important!)
+Monitoring tool, works with the prometheus/grafana server, exporting cluster data to it.
+
+`kubectl apply -f kube-state-metrics`
+
 ### Nginx Ingress Controller (!Important!)
 Necessary to manage ingress resources. Connects to external loadbalancer.
 
@@ -51,10 +56,14 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install ingress-controller -f <values-file> bitnami/nginx-ingress-controller 
 ```
 
-Where `<values-file>` is the proper values file.
+Where `<values-file>` is the proper values file. In the cluster-wide/ingress-controller folder.
 
 Example:
 `helm install ingress-controller -f ingress-controller-values.yaml bitnami/nginx-ingress-controller`
+
+#### Add ingress resource to kube state metrics (!Important!)
+
+`kubectl apply -f kube-state-ingress-<name>.yaml` where `<name>` is your name.
 
 ### Cluster Issuers (!Important!)
 
