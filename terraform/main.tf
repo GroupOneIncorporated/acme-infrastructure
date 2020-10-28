@@ -145,3 +145,23 @@ resource "openstack_compute_instance_v2" "k8s_node" {
 
   depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
 }
+
+# -- Monitoring -- #
+
+// Compute instance
+resource "openstack_compute_instance_v2" "monitoring" {
+  name        = "monitoring"
+  image_name  = "Debian 9"
+  flavor_name = "c2-r4-d10"
+  key_pair    = openstack_compute_keypair_v2.k8s.name
+
+  availability_zone_hints = "Education"
+
+  network {
+    name        = "k8s-network"
+  }
+
+  security_groups = ["default", "k8s_secgroup"]
+
+  depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
+}
