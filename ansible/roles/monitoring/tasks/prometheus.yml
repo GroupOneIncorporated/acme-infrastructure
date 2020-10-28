@@ -1,0 +1,137 @@
+---
+  - name: create group
+    become: yes
+    group:
+      name: prometheus
+      state: present
+
+  - name: create user
+    become: yes
+    user:
+      name: prometheus
+      group: prometheus
+      createhome: no
+      system: yes
+      state: present
+  
+  - name: create /prom
+    become: yes
+    file:
+      path: /prom
+      state: directory
+
+  - name: create /etc/prometheus
+    become: yes
+    file:
+      path: /etc/prometheus
+      state: directory
+  
+  - name: create /var/lib/prometheus
+    become: yes
+    file:
+      path: /var/lib/prometheus
+      state: directory
+  
+  - name: set permissions to /etc/prometheus
+    become: yes
+    shell:
+      chown prometheus:prometheus /etc/prometheus
+
+  - name: set permissions to /var/lib/prometheus
+    become: yes
+    shell:
+      chown prometheus:prometheus /var/lib/prometheus
+
+  - name: Download prometheus
+    become: yes
+    get_url:
+      url: https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-2.8.0.linux-amd64.tar.gz
+      dest: /prom
+    
+  - name: unarchive prometheus
+    become: yes
+    unarchive:
+      remote_src: yes
+      src: /prom/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz
+      dest: /prom
+
+  - name: Copy prometheus to /usr/local/bin/
+    become: yes
+    copy:
+      remote_src: yes
+      src: /prom/prometheus-{{ prometheus_version }}.linux-amd64/prometheus
+      dest: /usr/local/bin/
+      mode: +x
+  
+  - name: Copy promtool to /usr/local/bin/
+    become: yes
+    copy:
+      remote_src: yes
+      src: /prom/prometheus-{{ prometheus_version }}.linux-amd64/promtool
+      dest: /usr/local/bin/
+      mode: +x
+
+  - name: set permissions to prometheus
+    become: yes
+    shell:
+      chown prometheus:prometheus /usr/local/bin/prometheus
+  
+  - name: set permissions to promtool
+    become: yes
+    shell:
+      chown prometheus:prometheus /usr/local/bin/promtool
+
+  - name: copy consoles to /etc/prometheus/
+    become: yes
+    copy:
+      remote_src: yes
+      src: /prom/prometheus-{{ prometheus_version }}.linux-amd64/consoles
+      dest: /etc/prometheus/
+  
+  - name: copy  console_libraries to /etc/prometheus/
+    become: yes
+    copy:
+      remote_src: yes
+      src: /prom/prometheus-{{ prometheus_version }}.linux-amd64/console_libraries
+      dest: /etc/prometheus/
+
+  - name: set permissions to consoles
+    become: yes
+    shell:
+      chown -R prometheus:prometheus /etc/prometheus/consoles
+
+  - name: set permissions to console_libraries
+    become: yes
+    shell:
+      chown -R prometheus:prometheus /etc/prometheus/console_libraries
+
+  - name: copy  prometheus.yml to /etc/prometheus/
+    become: yes
+    copy:
+      src: ../../../../prometheus/prometheus/prometheus.yml
+      dest: /etc/prometheus/prometheus.yml
+
+  - name: copy  rules to /etc/prometheus/
+    become: yes
+    copy:
+      src: ../../../../prometheus/prometheus/rules/
+      dest: /etc/prometheus/rules/
+
+  - name: set permissions to prometheus.yml
+    become: yes
+    shell:
+      chown prometheus:prometheus /etc/prometheus/prometheus.yml
+
+  - name: copy prometheus.service to /etc/systemd/system
+    become: yes
+    copy:
+      src: ../../../../prometheus/prometheus/prometheus.service
+      dest: /etc/systemd/system/prometheus.service
+
+  - name: Reloading and starting systemctl
+    become: yes
+    systemd:
+      daemon_reload: yes
+      enabled: yes
+      state: started
+      name: prometheus.service

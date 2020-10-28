@@ -12,3 +12,10 @@
     - common
   tags:
     - common
+
+- name: "Role: monitoring"
+  hosts: monitoring
+  roles:
+    - monitoring
+  tags:
+    - monitoring
