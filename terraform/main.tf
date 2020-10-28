@@ -148,10 +148,9 @@ resource "openstack_compute_instance_v2" "k8s_node" {
 
 # -- Monitoring -- #
 
-// Compute instance
 resource "openstack_compute_instance_v2" "monitoring" {
   name        = "monitoring"
-  image_name  = "Debian 9"
+  image_name  = "GroupOneInc-Debian9-Monitoring"
   flavor_name = "c2-r4-d10"
   key_pair    = openstack_compute_keypair_v2.k8s.name
 
