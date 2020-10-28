@@ -6,7 +6,7 @@ echo "# --- Deploying k8s resources.. --- #"
 # Cloud.conf credentials
 echo "Deploying cloud conf secret.."
 cd cloud-config
-./createsecret.sh
+./createsecret.sh cloud.conf
 echo "Created cloud conf secret!"
 
 # Install cluster wide resources
