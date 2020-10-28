@@ -2,16 +2,16 @@
   hosts: all
   gather_facts: no
   tasks:
-  #- name: Waiting for hosts to go online (240s timeout)
-  #  wait_for_connection:
-  #    timeout: 240
+  - name: Waiting for hosts to go online (240s timeout)
+    wait_for_connection:
+      timeout: 240
 
-#- name: "Role: common"
-#  hosts: all
-#  roles:
-#    - common
-#  tags:
-#    - common
+- name: "Role: common"
+  hosts: all
+  roles:
+    - common
+  tags:
+    - common
 
 - name: "Role: monitoring"
   hosts: monitoring

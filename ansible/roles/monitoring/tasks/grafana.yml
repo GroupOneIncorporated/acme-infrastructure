@@ -18,6 +18,12 @@
     shell:
       add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
   
+  - name: update
+    become: yes
+    apt:
+      upgrade: yes
+      update_cache: yes
+
   - name: Install Grafana
     become: yes
     apt:
@@ -32,9 +38,9 @@
       state: started
       name: grafana-server
 
-  - name: Wating for server to start (25s)
-    wait_for_connection:
-      timeout: 25
+  - name: Wait for server to start (15s)
+    pause:
+      seconds: 15
 
   - name: Import datasource
     uri:
