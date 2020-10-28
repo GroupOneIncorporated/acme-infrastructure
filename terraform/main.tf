@@ -92,7 +92,7 @@ resource "openstack_networking_router_interface_v2" "k8s_router_interface" {
 resource "openstack_compute_instance_v2" "k8s_master" {
   name        = "k8s-master-${count.index + 1}"
   count       = var.num_k8s_masters
-  image_name  = "Debian 9"
+  image_name  = "GroupOneInc-Debian9-Docker"
   flavor_name = "c2-r4-d20"
   key_pair    = openstack_compute_keypair_v2.k8s.name
 
@@ -130,7 +130,7 @@ resource "openstack_compute_floatingip_associate_v2" "k8s_master" {
 resource "openstack_compute_instance_v2" "k8s_node" {
   name        = "k8s-node-${count.index + 1}"
   count       = var.num_k8s_nodes
-  image_name  = "Debian 9"
+  image_name  = "GroupOneInc-Debian9-Docker"
   flavor_name = "c2-r8-d20"
   key_pair    = openstack_compute_keypair_v2.k8s.name
 
@@ -139,6 +139,25 @@ resource "openstack_compute_instance_v2" "k8s_node" {
   network {
     name        = "k8s-network"
     fixed_ip_v4 = "192.168.199.${count.index + 11}"
+  }
+
+  security_groups = ["default", "k8s_secgroup"]
+
+  depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
+}
+
+# -- Monitoring -- #
+
+resource "openstack_compute_instance_v2" "monitoring" {
+  name        = "monitoring"
+  image_name  = "GroupOneInc-Debian9-Monitoring"
+  flavor_name = "c2-r4-d10"
+  key_pair    = openstack_compute_keypair_v2.k8s.name
+
+  availability_zone_hints = "Education"
+
+  network {
+    name        = "k8s-network"
   }
 
   security_groups = ["default", "k8s_secgroup"]
