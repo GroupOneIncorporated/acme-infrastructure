@@ -36,3 +36,9 @@ export KUBECONFIG=$(pwd)/kube_config_cluster.yml
 #export KUBECONFIG=$KUBECONFIG:$(pwd)/kube_config_cluster.yml
 
 echo "Infrastructure deployed successfully."
+
+# K8S Resources
+
+echo "Starting to deploy K8S resources.."
+cd ../kubernetes
+./k8s-deploy.sh
