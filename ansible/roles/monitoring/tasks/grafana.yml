@@ -70,3 +70,10 @@
       src: grafana/dashboards/
       dest: /var/lib/grafana/dashboards
 
+  - name: Reloading systemctl
+    become: yes
+    systemd:
+      daemon_reload: yes
+      enabled: yes
+      state: stopped
+      name: grafana-server

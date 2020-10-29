@@ -128,10 +128,10 @@
       src: prometheus/prometheus.service
       dest: /etc/systemd/system/prometheus.service
 
-  - name: Reloading and starting systemctl
+  - name: Reloading systemctl
     become: yes
     systemd:
       daemon_reload: yes
       enabled: yes
-      state: started
+      state: stopped
       name: prometheus.service

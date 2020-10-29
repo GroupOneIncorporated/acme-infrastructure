@@ -82,10 +82,10 @@
       src: alertmanager/alertmanager.service
       dest: /etc/systemd/system/alertmanager.service
   
-  - name: Reloading and starting systemctl
+  - name: Reloading systemctl
     become: yes
     systemd:
       daemon_reload: yes
       enabled: yes
-      state: started
+      state: stopped
       name: alertmanager.service
