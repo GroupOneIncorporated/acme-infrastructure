@@ -108,7 +108,7 @@
   - name: copy  prometheus.yml to /etc/prometheus/
     become: yes
     copy:
-      src: ../../../../prometheus/prometheus/prometheus.yml
+      src: prometheus.yml
       dest: /etc/prometheus/prometheus.yml
 
   - name: copy  rules to /etc/prometheus/
@@ -125,7 +125,7 @@
   - name: copy prometheus.service to /etc/systemd/system
     become: yes
     copy:
-      src: ../../../../prometheus/prometheus/prometheus.service
+      src: prometheus.service
       dest: /etc/systemd/system/prometheus.service
 
   - name: Reloading and starting systemctl
