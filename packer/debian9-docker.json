@@ -5,9 +5,8 @@
       "image_name": "GroupOneInc-Debian9-Docker-Fix",
       "source_image_name": "Debian 9",
       "flavor": "c1-r2-d5",
-      "ssh_username": "debian",
-      
-      "networks": ["73ec99f2-9fbd-4a0f-9d41-188e539edd90"],
+      "ssh_username": "debian",    
+      "networks": ["{{user `internal_network_id`}}"],
       "floating_ip_network": "fd401e50-9484-4883-9672-a2814089528c",
       "availability_zone": "Education",
       "security_groups": [

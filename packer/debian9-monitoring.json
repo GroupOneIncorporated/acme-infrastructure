@@ -6,8 +6,7 @@
       "source_image_name": "Debian 9",
       "flavor": "c1-r2-d5",
       "ssh_username": "debian",
-      
-      "networks": ["ab37e3b7-cde4-48a3-ab03-4a31dba99c87"],
+      "networks": ["{{user `internal_network_id`}}"],
       "floating_ip_network": "fd401e50-9484-4883-9672-a2814089528c",
       "availability_zone": "Education",
       "security_groups": [
