@@ -63,7 +63,7 @@ kubectl apply -f kube-state-metrics
 echo "# --- Installed Kube-State-Metrics! --- #"
 cd ingress-controller
 echo "# --- Installing Kube-State-Metrics ingress.. --- #"
-kubectl apply -f kube-state-ingress-$1.yaml
+kubectl apply -f kube-state-ingress-$1.yaml -n kube-system
 echo "# --- Installed ingress! --- #"
 cd ..
 

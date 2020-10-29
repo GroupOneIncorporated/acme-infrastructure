@@ -92,7 +92,7 @@ resource "openstack_networking_router_interface_v2" "k8s_router_interface" {
 resource "openstack_compute_instance_v2" "k8s_master" {
   name        = "k8s-master-${count.index + 1}"
   count       = var.num_k8s_masters
-  image_name  = "GroupOneInc-Debian9-Docker"
+  image_name  = "GroupOneInc-Debian9-Docker-Fix"
   flavor_name = "c2-r4-d20"
   key_pair    = openstack_compute_keypair_v2.k8s.name
 
@@ -130,7 +130,7 @@ resource "openstack_compute_floatingip_associate_v2" "k8s_master" {
 resource "openstack_compute_instance_v2" "k8s_node" {
   name        = "k8s-node-${count.index + 1}"
   count       = var.num_k8s_nodes
-  image_name  = "GroupOneInc-Debian9-Docker"
+  image_name  = "GroupOneInc-Debian9-Docker-Fix"
   flavor_name = "c2-r8-d20"
   key_pair    = openstack_compute_keypair_v2.k8s.name
 

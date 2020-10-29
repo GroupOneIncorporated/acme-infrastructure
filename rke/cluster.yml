@@ -1,6 +1,6 @@
 ssh_key_path: ~/.ssh/GroupOneInc.pem
 nodes:
-  - address: 194.47.176.228
+  - address: 194.47.176.234
     internal_address: 192.168.199.21
     role:
       - controlplane
@@ -60,6 +60,6 @@ authorization:
 ingress:
   provider: none
 bastion_host:
-  address: 194.47.176.228
+  address: 194.47.176.234
   user: debian
   port: 22

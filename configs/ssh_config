@@ -1,5 +1,5 @@
 Host k8s-master-1
-HostName 194.47.176.228
+HostName 194.47.176.234
 User debian
 IdentityFile ~/.ssh/GroupOneInc.pem
 
