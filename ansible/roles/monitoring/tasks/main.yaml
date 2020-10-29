@@ -1,23 +1,23 @@
 - name: update
   become: yes
   apt:
-    upgrade: yes
+    upgrade: "yes"
     update_cache: yes
 
 - name: Install Prometheus
-  include: prometheus.yml
+  include: prometheus.yaml
   remote_user: debian
   vars:
     prometheus_version: 2.8.0
 
 - name: Install Grafana
-  include: grafana.yml
+  include: grafana.yaml
   remote_user: debian
   vars:
     grafana_version: 2.8.0
 
 - name: Install Alertmanager
-  include: alertmanager.yml
+  include: alertmanager.yaml
   remote_user: debian
   vars:
     alertmanager_version: 2.8.0
