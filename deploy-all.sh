@@ -30,10 +30,20 @@ npm start acme-infrastructure.json
 #unset ANSIBLE_SSH_ARGS
 
 # Wait for ssh
-until ssh k8s-master-1 -F $(pwd)/../configs/ssh_config; do
-    echo "Waiting for ssh.."
+repeatssh() {
+until ssh $1 -F $(pwd)/../configs/ssh_config; do
+    echo "Waiting for ssh for host $1.."
     sleep 5s
 done
+echo "$1 is ssh-able!"
+}
+
+repeatssh k8s-master-1
+repeatssh k8s-node-1
+repeatssh k8s-node-2
+repeatssh k8s-node-3
+repeatssh k8s-node-4
+repeatssh k8s-node-5
 
 # rke
 cd ../rke
