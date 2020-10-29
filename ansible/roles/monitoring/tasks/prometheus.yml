@@ -114,7 +114,7 @@
   - name: copy  rules to /etc/prometheus/
     become: yes
     copy:
-      src: ../../../../prometheus/prometheus/rules/
+      src: rules/
       dest: /etc/prometheus/rules/
 
   - name: set permissions to prometheus.yml
