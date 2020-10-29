@@ -31,7 +31,7 @@ npm start acme-infrastructure.json
 
 # Wait for ssh
 repeatssh() {
-until ssh $1 -F $(pwd)/../configs/ssh_config -q -o "StrictHostKeyChecking=no" exit; do
+until ssh $1 -F $(pwd)/../configs/ssh_config -q -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" exit; do
     echo "Waiting for ssh for host $1.."
     sleep 5s
 done
