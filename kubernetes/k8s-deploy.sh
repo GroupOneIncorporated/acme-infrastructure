@@ -51,9 +51,9 @@ cd ..
 echo "# --- Installing Cert-Manager.. --- #"
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.0.3/cert-manager.yaml
 echo "# --- Cert-Manager installed! --- #"
-kubectl rollout status deployment cert-manager
-kubectl rollout status deployment cert-manager-cainjector
-kubectl rollout status deployment cert-manager-webhook
+kubectl rollout status deployment cert-manager -n cert-manager
+kubectl rollout status deployment cert-manager-cainjector -n cert-manager
+kubectl rollout status deployment cert-manager-webhook -n cert-manager
 echo "# --- Installing ClusterIssuer(s).. --- #"
 cd cert-manager
 kubectl apply -f letsencrypt-staging
