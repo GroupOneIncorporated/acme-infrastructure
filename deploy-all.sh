@@ -29,6 +29,7 @@ npm start acme-infrastructure.json
 
 #unset ANSIBLE_SSH_ARGS
 
+sleep 60s
 # rke
 cd ../rke
 rke up #--ssh-agent-auth
