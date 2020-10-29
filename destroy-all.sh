@@ -10,15 +10,9 @@ export KUBECONFIG=$(pwd)/kube_config_cluster.yml
 cd ..
 
 # Uninstall chart
-echo "Uninstalling application.."
+echo "Uninstalling k8s resources.."
 cd kubernetes
-helm uninstall acmewp -n acme
-echo "Application uninstalled!"
-
-# Uninstall ingress-controller / LB
-echo "Uninstalling ingress controller / loadbalancer.."
-helm uninstall ingress-controller
-echo "Ingress controller / loadbalancer uninstalled!"
+./k8s-destroy.sh
 
 # Destroy cluster
 echo "Destroying K8S cluster.."

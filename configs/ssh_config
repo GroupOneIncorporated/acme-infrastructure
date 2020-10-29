@@ -1,35 +1,35 @@
 Host k8s-master-1
-HostName 194.47.177.126
+HostName 194.47.176.228
 User debian
 IdentityFile ~/.ssh/GroupOneInc.pem
 
 Host k8s-node-1
 ProxyJump k8s-master-1
-HostName 192.168.199.13
+HostName 192.168.199.11
 User debian
 IdentityFile ~/.ssh/GroupOneInc.pem
 
 Host k8s-node-2
 ProxyJump k8s-master-1
-HostName 192.168.199.8
+HostName 192.168.199.12
 User debian
 IdentityFile ~/.ssh/GroupOneInc.pem
 
 Host k8s-node-3
 ProxyJump k8s-master-1
-HostName 192.168.199.9
+HostName 192.168.199.13
 User debian
 IdentityFile ~/.ssh/GroupOneInc.pem
 
 Host k8s-node-4
 ProxyJump k8s-master-1
-HostName 192.168.199.5
+HostName 192.168.199.14
 User debian
 IdentityFile ~/.ssh/GroupOneInc.pem
 
 Host k8s-node-5
 ProxyJump k8s-master-1
-HostName 192.168.199.6
+HostName 192.168.199.15
 User debian
 IdentityFile ~/.ssh/GroupOneInc.pem
 
