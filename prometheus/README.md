@@ -1,4 +1,4 @@
-The scripts are built for ubuntu.  
-1. sudo chmod +x install_prometheus.sh  
-2. ./install_prometheus.sh  
-Note: The script will also start systemctl with prometheus
+# Prometheus  
+The shell scripts are deprecated, Look at Ansible/monitoring.  
+The files in this folder are mainly to provide Ansible with the required content.  
+Note: Nothing in this folder should run. This is mainly for resources.
