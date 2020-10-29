@@ -108,7 +108,7 @@
   - name: copy  prometheus.yml to /etc/prometheus/
     become: yes
     copy:
-      src: prometheus/prometheus.yml
+      src: prometheus/prometheus.yaml
       dest: /etc/prometheus/prometheus.yml
 
   - name: copy  rules to /etc/prometheus/

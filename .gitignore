@@ -178,7 +178,6 @@ override.tf.json
 **/wp-content
 **/cloud.conf
 **/alertmanager.yml
-**/alertmanager.yaml
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,vscode,ansible,helm,terraform,node
 n
