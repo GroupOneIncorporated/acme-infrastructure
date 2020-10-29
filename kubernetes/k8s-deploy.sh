@@ -43,7 +43,7 @@ echo "# --- Adding helm repo.. --- #"
 helm repo add bitnami https://charts.bitnami.com/bitnami
 echo "# --- Helm repod added! --- #"
 cd ingress-controller
-helm install ingress-controller -f ingress-controller-values.yaml bitnami/nginx-ingress-controller
+helm install ingress-controller -f ingress-controller-values-$1.yaml bitnami/nginx-ingress-controller
 echo "# --- Nginx Ingress Controller Installed! --- #"
 cd ..
 
@@ -63,7 +63,7 @@ kubectl apply -f kube-state-metrics
 echo "# --- Installed Kube-State-Metrics! --- #"
 cd ingress-controller
 echo "# --- Installing Kube-State-Metrics ingress.. --- #"
-kubectl apply -f kube-state-metrics-ingress.yaml
+kubectl apply -f kube-state-ingress-$1.yaml
 echo "# --- Installed ingress! --- #"
 cd ..
 
@@ -82,7 +82,7 @@ echo "# --- Installed K8S Dashboard! --- #"
 # Helm chart
 echo "# --- Installing Wordpress helm chart.. --- #"
 cd acme-platform
-helm install -f env/values.yaml acmewp ./wordpress-platform -n acme
+helm install -f env/values-$1.yaml acmewp ./wordpress-platform -n acme
 echo "# --- Installed Wordpress! --- #"
 
 echo "# --- K8S resources deployed! --- #"

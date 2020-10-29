@@ -41,4 +41,4 @@ echo "Infrastructure deployed successfully."
 
 echo "Starting to deploy K8S resources.."
 cd ../kubernetes
-./k8s-deploy.sh
+./k8s-deploy.sh $1
