@@ -1,91 +1,91 @@
 ---
-- name: create group
-  become: yes
-  group:
-    name: alertmanager
-    state: present
+  - name: create group
+    become: yes
+    group:
+      name: alertmanager
+      state: present
 
-- name: create user
-  become: yes
-  user:
-    name: alertmanager
-    group: alertmanager
-    createhome: no
-    system: yes
-    state: present    
-
-- name: create /alert
-  become: yes
-  file:
-    path: /alert
-    state: directory
-
-- name: Download alertmanager
-  become: yes
-  get_url:
-    url: https://github.com/prometheus/alertmanager/releases/download/v0.17.0/alertmanager-0.17.0.linux-amd64.tar.gz
-    dest: /alert
-
-- name: unarchive alertmanager
-  become: yes
-  unarchive:
-    remote_src: yes
-    src: /alert/alertmanager-0.17.0.linux-amd64.tar.gz
-    dest: /alert
-
-- name: Copy alertmanager to /usr/local/bin/
-  become: yes
-  copy:
-    remote_src: yes
-    src: /alert/alertmanager-0.17.0.linux-amd64/alertmanager
-    dest: /usr/local/bin/
-    mode: +x
-
-- name: Copy amtool to /usr/local/bin/
-  become: yes
-  copy:
-    remote_src: yes
-    src: /alert/alertmanager-0.17.0.linux-amd64/amtool
-    dest: /usr/local/bin/
-    mode: +x
-
-- name: set permissions to alertmanager
-  become: yes
-  shell:
-    chown alertmanager:alertmanager /usr/local/bin/alertmanager
-
-- name: set permissions to amtool
-  become: yes
-  shell:
-    chown alertmanager:alertmanager /usr/local/bin/amtool
-
-- name: create /etc/alertmanager
-  become: yes
-  file:
-    path: /etc/alertmanager
-    state: directory
-
-- name: copy  alertmanager.yaml to /etc/alertmanager/
-  become: yes
-  copy:
-    src: ../../../../prometheus/alertManager/alertmanager.yaml
-    dest: /etc/alertmanager/alertmanager.yaml
-
-- name: set permissions to alertmanager
-  become: yes
-  shell:
-    chown alertmanager:alertmanager -R /etc/alertmanager
-
-- name: copy  service file to working directory
-  become: yes
-  copy:
-    src: ../../../../prometheus/alertManager/alertmanager.service
-    dest: /etc/systemd/system/alertmanager.service
+  - name: create user
+    become: yes
+    user:
+      name: alertmanager
+      group: alertmanager
+      createhome: no
+      system: yes
+      state: present
     
-- name: Reloading and starting systemctl
-  become: yes
-  systemd:
-    daemon_reload: yes
-    enabled: yes
-    state: started
-    name: alertmanager.service
+  - name: create /alert
+    become: yes
+    file:
+      path: /alert
+      state: directory
+
+  - name: Download alertmanager
+    become: yes
+    get_url:
+      url: https://github.com/prometheus/alertmanager/releases/download/v0.17.0/alertmanager-0.17.0.linux-amd64.tar.gz
+      dest: /alert
+    
+  - name: unarchive alertmanager
+    become: yes
+    unarchive:
+      remote_src: yes
+      src: /alert/alertmanager-0.17.0.linux-amd64.tar.gz
+      dest: /alert
+
+  - name: Copy alertmanager to /usr/local/bin/
+    become: yes
+    copy:
+      remote_src: yes
+      src: /alert/alertmanager-0.17.0.linux-amd64/alertmanager
+      dest: /usr/local/bin/
+      mode: +x
+  
+  - name: Copy amtool to /usr/local/bin/
+    become: yes
+    copy:
+      remote_src: yes
+      src: /alert/alertmanager-0.17.0.linux-amd64/amtool
+      dest: /usr/local/bin/
+      mode: +x
+  
+  - name: set permissions to alertmanager
+    become: yes
+    shell:
+      chown alertmanager:alertmanager /usr/local/bin/alertmanager
+  
+  - name: set permissions to amtool
+    become: yes
+    shell:
+      chown alertmanager:alertmanager /usr/local/bin/amtool
+
+  - name: create /etc/alertmanager
+    become: yes
+    file:
+      path: /etc/alertmanager
+      state: directory
+  
+  - name: copy  alertmanager.yml to /etc/alertmanager/
+    become: yes
+    copy:
+      src: alertmanager/alertmanager.yml
+      dest: /etc/alertmanager/alertmanager.yml
+
+  - name: set permissions to alertmanager
+    become: yes
+    shell:
+      chown alertmanager:alertmanager -R /etc/alertmanager
+  
+  - name: copy  service file to working directory
+    become: yes
+    copy:
+      src: alertmanager/alertmanager.service
+      dest: /etc/systemd/system/alertmanager.service
+  
+  - name: Reloading systemctl
+    become: yes
+    systemd:
+      daemon_reload: yes
+      enabled: yes
+      state: stopped
+      name: alertmanager.service

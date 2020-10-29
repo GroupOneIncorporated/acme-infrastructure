@@ -1,4 +1,0 @@
-*.exe
-data
-console*
-alertManager/alertmanager.yml

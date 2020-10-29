@@ -18,25 +18,9 @@
   ],
   "provisioners": [
     {
-      "type": "file",
-      "source": "../prometheus/",
-      "destination": "/tmp/"
-    },
-    {
-      "type": "shell",
-      "inline": [
-        "cd /tmp/prometheus",
-        "sudo chmod +x ./install_prometheus.sh",
-        "./install_prometheus.sh",
-        
-        "cd /tmp/grafana",
-        "sudo chmod +x ./install_grafana.sh",
-        "./install_grafana.sh",
-        
-        "cd /tmp/alertManager",
-        "sudo chmod +x ./install_alertmanager.sh",
-        "./install_alertmanager.sh"
-      ]
+      "type": "ansible",
+      "user": "debian",
+      "playbook_file": "../ansible/site-monitoring.yaml"
     }
   ]
 }

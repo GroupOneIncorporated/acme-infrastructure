@@ -11,9 +11,9 @@ route:
 receivers:
 - name: 'email'
   email_configs:
-  - to: email
-    from: email
+  - to: gabriel.bjorlin2@gmail.com
+    from: gabriel.bjorlin2@gmail.com
     smarthost: smtp.gmail.com:587
-    auth_username: "email"
-    auth_identity: "email"
-    auth_password: ""
+    auth_username: "gabriel.bjorlin2@gmail.com"
+    auth_identity: "gabriel.bjorlin2@gmail.com"
+    auth_password: "L@Z7^NnQ8hu6PBum2FV8Y#sF8oVedi!j"
