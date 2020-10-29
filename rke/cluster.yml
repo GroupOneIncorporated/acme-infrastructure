@@ -1,7 +1,7 @@
 ssh_key_path: ~/.ssh/GroupOneInc.pem
 nodes:
-  - address: 194.47.177.126
-    internal_address: 192.168.199.14
+  - address: 194.47.176.228
+    internal_address: 192.168.199.21
     role:
       - controlplane
       - etcd
@@ -13,32 +13,32 @@ nodes:
       - key: node-role.kubernetes.io/master
         value: true
         effect: NoSchedule
-  - address: 192.168.199.13
-    internal_address: 192.168.199.13
+  - address: 192.168.199.11
+    internal_address: 192.168.199.11
     role:
       - worker
     hostname_override: k8s-node-1
     user: debian
-  - address: 192.168.199.8
-    internal_address: 192.168.199.8
+  - address: 192.168.199.12
+    internal_address: 192.168.199.12
     role:
       - worker
     hostname_override: k8s-node-2
     user: debian
-  - address: 192.168.199.9
-    internal_address: 192.168.199.9
+  - address: 192.168.199.13
+    internal_address: 192.168.199.13
     role:
       - worker
     hostname_override: k8s-node-3
     user: debian
-  - address: 192.168.199.5
-    internal_address: 192.168.199.5
+  - address: 192.168.199.14
+    internal_address: 192.168.199.14
     role:
       - worker
     hostname_override: k8s-node-4
     user: debian
-  - address: 192.168.199.6
-    internal_address: 192.168.199.6
+  - address: 192.168.199.15
+    internal_address: 192.168.199.15
     role:
       - worker
     hostname_override: k8s-node-5
@@ -60,6 +60,6 @@ authorization:
 ingress:
   provider: none
 bastion_host:
-  address: 194.47.177.126
+  address: 194.47.176.228
   user: debian
   port: 22

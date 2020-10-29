@@ -5,10 +5,6 @@ k8s-node-3
 k8s-node-4
 k8s-node-5
 
-[monitoring]
-194.47.177.106
-
 [all:vars]
 docker_version="5:19.03.*"
-ansible_user=debian
-ansible_ssh_private_key_file ~/.ssh/GroupOneInc.pem
+    

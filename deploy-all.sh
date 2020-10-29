@@ -21,17 +21,17 @@ npm install
 npm start acme-infrastructure.json
 
 # Ansible
-export ANSIBLE_SSH_ARGS="-C -o ControlMaster=auto -o ControlPersist=60s -F $(pwd)/../configs/ssh_config"
+#export ANSIBLE_SSH_ARGS="-C -o ControlMaster=auto -o ControlPersist=60s -F $(pwd)/../configs/ssh_config"
 # This is a temporary fix for host key checking
-export ANSIBLE_HOST_KEY_CHECKING=false
-cd ../ansible
-ansible-playbook -i hosts site.yaml
+#export ANSIBLE_HOST_KEY_CHECKING=false
+#cd ../ansible
+#ansible-playbook -i hosts site.yaml
 
-unset ANSIBLE_SSH_ARGS
+#unset ANSIBLE_SSH_ARGS
 
 # rke
 cd ../rke
-rke up
+rke up #--ssh-agent-auth
 export KUBECONFIG=$(pwd)/kube_config_cluster.yml
 #export KUBECONFIG=$KUBECONFIG:$(pwd)/kube_config_cluster.yml
 
