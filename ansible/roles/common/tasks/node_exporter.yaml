@@ -43,7 +43,7 @@
 - name: install unit file to systemd
   become: yes
   template:
-    src: ../../../../node_exporter/node_exporter.service
+    src: node_exporter.service
     dest: /etc/systemd/system/node_exporter.service
     
 - name: configure systemd to use service
