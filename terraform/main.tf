@@ -158,9 +158,21 @@ resource "openstack_compute_instance_v2" "monitoring" {
 
   network {
     name        = "k8s-network"
+    fixed_ip_v4 = "192.168.199.31"
   }
 
   security_groups = ["default", "k8s_secgroup"]
 
   depends_on = [openstack_networking_network_v2.k8s_network, openstack_networking_subnet_v2.k8s_subnet]
+}
+
+// Floating IP for Monitoring
+resource "openstack_networking_floatingip_v2" "monitoring" {
+  pool  = "public"
+}
+
+// Floating IP associate Monitoring
+resource "openstack_compute_floatingip_associate_v2" "monitoring" {
+  instance_id = openstack_compute_instance_v2.monitoring.id
+  floating_ip = openstack_networking_floatingip_v2.monitoring.address
 }
