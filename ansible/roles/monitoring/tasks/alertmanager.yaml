@@ -65,11 +65,11 @@
       path: /etc/alertmanager
       state: directory
   
-  - name: copy  alertmanager.yml to /etc/alertmanager/
+  - name: copy  alertmanager.yaml to /etc/alertmanager/
     become: yes
     copy:
-      src: alertmanager/alertmanager.yml
-      dest: /etc/alertmanager/alertmanager.yml
+      src: alertmanager/alertmanager.yaml
+      dest: /etc/alertmanager/alertmanager.yaml
 
   - name: set permissions to alertmanager
     become: yes

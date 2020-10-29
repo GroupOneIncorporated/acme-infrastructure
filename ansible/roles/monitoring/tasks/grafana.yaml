@@ -61,8 +61,8 @@
   - name: Import config for datasource
     become: yes
     copy:
-      src: grafana/sample.yml
-      dest: /etc/grafana/provisioning/dashboards/sample.yml
+      src: grafana/sample.yaml
+      dest: /etc/grafana/provisioning/dashboards/sample.yaml
   
   - name: Import dashboard
     become: yes
