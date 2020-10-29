@@ -29,7 +29,12 @@ npm start acme-infrastructure.json
 
 #unset ANSIBLE_SSH_ARGS
 
-sleep 60s
+# Wait for ssh
+until ssh k8s-master-1 -F $(pwd)/../configs/ssh_config; do
+    echo "Waiting for ssh.."
+    sleep 5s
+done
+
 # rke
 cd ../rke
 rke up #--ssh-agent-auth
