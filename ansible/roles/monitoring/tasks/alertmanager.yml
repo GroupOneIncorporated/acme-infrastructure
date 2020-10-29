@@ -68,7 +68,7 @@
   - name: copy  alertmanager.yml to /etc/alertmanager/
     become: yes
     copy:
-      src: alertmanager.yml
+      src: alertmanager/alertmanager.yml
       dest: /etc/alertmanager/alertmanager.yml
 
   - name: set permissions to alertmanager
@@ -79,7 +79,7 @@
   - name: copy  service file to working directory
     become: yes
     copy:
-      src: alertmanager.service
+      src: alertmanager/alertmanager.service
       dest: /etc/systemd/system/alertmanager.service
   
   - name: Reloading and starting systemctl

@@ -61,12 +61,12 @@
   - name: Import config for datasource
     become: yes
     copy:
-      src: ../../../../prometheus/grafana/sample.yml
+      src: grafana/sample.yml
       dest: /etc/grafana/provisioning/dashboards/sample.yml
   
   - name: Import dashboard
     become: yes
     copy:
-      src: ../../../../prometheus/grafana/dashboards/
+      src: grafana/dashboards/
       dest: /var/lib/grafana/dashboards
 
