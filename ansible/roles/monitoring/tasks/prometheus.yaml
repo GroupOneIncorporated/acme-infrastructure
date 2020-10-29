@@ -105,11 +105,11 @@
     shell:
       chown -R prometheus:prometheus /etc/prometheus/console_libraries
 
-  - name: copy  prometheus.yml to /etc/prometheus/
+  - name: copy  prometheus.yaml to /etc/prometheus/
     become: yes
     copy:
       src: prometheus/prometheus.yaml
-      dest: /etc/prometheus/prometheus.yml
+      dest: /etc/prometheus/prometheus.yaml
 
   - name: copy  rules to /etc/prometheus/
     become: yes
@@ -117,10 +117,10 @@
       src: prometheus/rules/
       dest: /etc/prometheus/rules/
 
-  - name: set permissions to prometheus.yml
+  - name: set permissions to prometheus.yaml
     become: yes
     shell:
-      chown prometheus:prometheus /etc/prometheus/prometheus.yml
+      chown prometheus:prometheus /etc/prometheus/prometheus.yaml
 
   - name: copy prometheus.service to /etc/systemd/system
     become: yes
