@@ -85,4 +85,4 @@ cd acme-platform
 helm install -f env/values.yaml acmewp ./wordpress-platform -n acme
 echo "Installed Wordpress!"
 
-echo "K8S resources deployed!"
+echo "# --- K8S resources deployed! --- #"
