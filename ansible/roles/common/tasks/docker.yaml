@@ -41,6 +41,7 @@
 - name: Reloading systemctl
   become: yes
   systemd:
+    daemon_reload: yes
     enabled: yes
     state: stopped
     name: docker.service
