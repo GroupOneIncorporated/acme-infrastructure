@@ -2588,8 +2588,8 @@
     ]
   },
   "time": {
-    "from": "2020-10-27T17:52:15.584Z",
-    "to": "2020-10-27T18:02:36.274Z"
+    "from": "now-1h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
